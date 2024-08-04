@@ -24,11 +24,22 @@ async function extractImagesFromPage(page, url) {
   // Extract image URLs using page.evaluate
   const imageUrls = await page.evaluate(() => {
     // Get all image elements
-    const images = Array.from(document.querySelectorAll("img"));
-    // Return their src attributes
-    return images.map((img) => img.src);
+    try {
+      if (
+        document.querySelectorAll(".breadcrumb.hidden-sm-down>ol>li>a>span")[2]
+          .textContent === "Capteurs"
+      ) {
+        const images = Array.from(document.querySelectorAll(".col-md-6 img"));
+        // Return their src attributes
+        return images.map((img) => img.src);
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
   });
-
   return imageUrls;
 }
 
