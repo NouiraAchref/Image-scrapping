@@ -22,16 +22,17 @@ async function extractImagesFromPage(page, url) {
   await page.goto(url, { waitUntil: "networkidle2" });
 
   // Extract image URLs using page.evaluate
-  const imageUrls = await page.evaluate(() => {
+  return await page.evaluate(() => {
     // Get all image elements
     try {
       if (
         document.querySelectorAll(".breadcrumb.hidden-sm-down>ol>li>a>span")[2]
           .textContent === "Capteurs"
       ) {
-        const images = Array.from(document.querySelectorAll(".col-md-6 img"));
         // Return their src attributes
-        return images.map((img) => img.src);
+        return Array.from(document.querySelectorAll(".col-md-6 img")).map(
+          (img) => img.src
+        );
       } else {
         return [];
       }
@@ -40,45 +41,48 @@ async function extractImagesFromPage(page, url) {
       return [];
     }
   });
-  return imageUrls;
 }
 
 // Function to save images to disk
-async function saveImage(imageUrl, browser) {
-  const page = await browser.newPage();
-  const response = await page.goto(imageUrl);
-  const buffer = await response.buffer();
+async function saveImage(imageUrl, imagesDir) {
   const fileName = path.basename(imageUrl);
-  const filePath = path.resolve(__dirname, "images", fileName);
+  const filePath = path.resolve(imagesDir, fileName);
 
-  await fs.mkdir(path.dirname(filePath), { recursive: true });
-  await fs.writeFile(filePath, buffer);
-  await page.close();
+  try {
+    // const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
+    // await fs.mkdir(path.dirname(filePath), { recursive: true });
+    // await fs.writeFile(filePath, response.data);
+    await fs.appendFile("file.txt", imageUrl + "\n");
+  } catch (error) {
+    console.error(`Error saving image ${imageUrl}:`, error);
+  }
 }
 
 // Main function
 async function main() {
   const sitemapUrl = "https://www.alliantech.com/1_fr_0_sitemap.xml"; // Replace with your sitemap URL
+  const imagesDir = path.resolve(__dirname, "images");
 
   const urls = await getSitemapUrls(sitemapUrl);
   if (urls.length === 0) return;
 
   const browser = await puppeteer.launch({ headless: true });
-  try {
-    const page = await browser.newPage();
-    let l = 0;
+  const page = await browser.newPage();
 
-    for (const url of urls) {
+  try {
+    for (const [index, url] of urls.entries()) {
       const imageUrls = await extractImagesFromPage(page, url);
+      console.log(`Processing ${index + 1} of ${urls.length}`);
+
+      // Use Promise.all to handle parallel saving of images
       await Promise.all(
-        imageUrls.map((imageUrl) => saveImage(imageUrl, browser))
+        imageUrls.map((imageUrl) => saveImage(imageUrl, imagesDir))
       );
-      l += 1;
-      console.log(l, " of ", urls.length);
     }
   } catch (error) {
     console.error("Error during processing:", error);
   } finally {
+    await page.close();
     await browser.close();
   }
 }
