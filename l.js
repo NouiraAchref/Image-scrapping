@@ -1,19 +1,15 @@
 import axios from "axios";
 import puppeteer from "puppeteer";
 import xml2js from "xml2js";
-
 import fs from "fs/promises";
-
 import path from "path";
-
 import { removeBackground } from "@imgly/background-removal-node";
 import { fileURLToPath } from "url";
+import { Jimp } from "jimp";
 
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-const __dirname = path.dirname(__filename); // get the name of the directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// const sharp = require("sharp");
-// Function to get URLs from the sitemap
 async function getSitemapUrls(sitemapUrl) {
   try {
     const { data: xml } = await axios.get(sitemapUrl);
@@ -24,17 +20,17 @@ async function getSitemapUrls(sitemapUrl) {
     return [];
   }
 }
+
 async function removeImageBackground(imgSource) {
   try {
     const blob = await removeBackground(imgSource);
     const buffer = Buffer.from(await blob.arrayBuffer());
-    const dataURL = `data:image/png;base64,${buffer.toString("base64")}`;
-    return dataURL;
+    return `data:image/png;base64,${buffer.toString("base64")}`;
   } catch (error) {
-    throw new Error("Error removing background: " + error);
+    throw new Error("Error removing background: " + error.message);
   }
 }
-// Function to extract images from a single page
+
 async function extractImagesFromPage(page, url) {
   // Navigate to the page
   await page.goto(url, { waitUntil: "networkidle2" });
@@ -61,46 +57,71 @@ async function extractImagesFromPage(page, url) {
   });
 }
 
-// Function to save images to disk
 async function saveImage(imageUrl, imagesDir) {
-  const fileName = path.basename(imageUrl);
-  const filePath = path.resolve(imagesDir, fileName);
   try {
-    const resultDataURL = await removeImageBackground(imageUrl);
-    fs.writeFile("output.png", resultDataURL.split(";base64,").pop(), {
-      encoding: "base64",
-    });
-
-    console.log("Background removed successfully.");
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-  try {
+    const fileName = path.basename(imageUrl);
+    const filePath = path.resolve(imagesDir, fileName);
     const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
+
     await fs.mkdir(path.dirname(filePath), { recursive: true });
     await fs.writeFile(filePath, response.data);
     await fs.appendFile("file.txt", imageUrl + "\n");
+
+    console.log(`Image saved: ${fileName}`);
   } catch (error) {
     console.error(`Error saving image ${imageUrl}:`, error);
   }
 }
 
-// Main function
+async function processImage(imageUrl, imagesDir) {
+  try {
+    const resultDataURL = await removeImageBackground(imageUrl);
+    const base64Data = resultDataURL.split(";base64,").pop();
+    const buffer = Buffer.from(base64Data, "base64");
+
+    const image = await Jimp.read(buffer);
+    image.resize(128, Jimp.AUTO).blur(18);
+
+    const outputPath = path.resolve(imagesDir, "output.png");
+    await image.writeAsync(outputPath);
+
+    console.log("Background removed and image processed successfully.");
+  } catch (error) {
+    console.error("Error removing background:", error.message);
+  }
+}
+
 async function main() {
+  const image1 = await Jimp.read(
+    "https://media.geeksforgeeks.org/wp-content/uploads/20190328185307/gfg28.png"
+  );
+  const image2 = await Jimp.read(
+    "https://www.pngitem.com/pimgs/m/689-6892366_transparent-random-guy-png-png-download.png"
+  );
+
+  //call to blit function
+  image1
+    .blit(image2, 20, 40)
+    //write image
+    .write("blit1.png");
+  image2.autocrop().write("blit2.png");
   const sitemapUrl = "https://www.alliantech.com/1_fr_0_sitemap.xml"; // Replace with your sitemap URL
   const imagesDir = path.resolve(__dirname, "images");
   const urls = await getSitemapUrls(sitemapUrl);
+
   if (urls.length === 0) return;
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
+
   try {
     for (const [index, url] of urls.entries()) {
       const imageUrls = await extractImagesFromPage(page, url);
       console.log(`Processing ${index + 1} of ${urls.length}`);
-      // Use Promise.all to handle parallel saving of images
+
       await Promise.all(
-        imageUrls.map((imageUrl) => {
-          saveImage(imageUrl, imagesDir);
+        imageUrls.map(async (imageUrl) => {
+          await processImage(imageUrl, imagesDir);
+          await saveImage(imageUrl, imagesDir);
         })
       );
     }
@@ -112,5 +133,4 @@ async function main() {
   }
 }
 
-// Run the main function
 main().catch(console.error);
