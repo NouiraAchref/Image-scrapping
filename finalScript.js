@@ -4,7 +4,6 @@ import xml2js from "xml2js";
 import fs from "fs/promises";
 import path from "path";
 import { removeBackground } from "@imgly/background-removal-node";
-import {Jimp} from "jimp";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url); // Get the resolved path to the file
@@ -22,6 +21,59 @@ async function getSitemapUrls(sitemapUrl) {
   }
 }
 
+// Function to save canvas image to a file
+async function saveCanvasToFile(page, selector, imageName, savePath) {
+  const dataUrl = await page.$eval(selector, (canvas) => canvas.toDataURL());
+  const base64Data = dataUrl.replace(/^data:image\/png;base64,/, "");
+
+  // Ensure to await the write operation
+  await fs.writeFile(
+    path.join(savePath, `${imageName}.png`),
+    base64Data,
+    "base64"
+  );
+}
+
+async function imagesIcrease(imageName, pageUrl) {
+  // Launch browser
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
+
+  // Navigate to your page
+  await page.goto(pageUrl, {
+    waitUntil: "load",
+  });
+
+  // Simulate image upload
+  const inputUploadHandle = await page.$("#uploadImage");
+  const imagePath = path.resolve(__dirname, imageName);
+  await inputUploadHandle.uploadFile(imagePath);
+  const saveDirectory = path.join(__dirname, "augmented_images");
+  // Define the directory to save images
+  try {
+    // Check if the directory exists
+    await fs.access(saveDirectory);
+  } catch (error) {
+    // Directory doesn't exist, so create it
+    await fs.mkdir(saveDirectory, { recursive: true });
+  }
+
+  // Get all canvas elements (augmented images)
+  const canvasElements = await page.$$("#output canvas");
+
+  for (let i = 0; i < canvasElements.length; i++) {
+    await saveCanvasToFile(
+      page,
+      `#output canvas:nth-of-type(${i + 1})`,
+      i,
+      saveDirectory
+    );
+  }
+
+  console.log("Images saved to:", saveDirectory);
+
+  await browser.close();
+}
 // Function to remove the background from an image
 async function removeImageBackground(imgSource) {
   try {
@@ -33,105 +85,12 @@ async function removeImageBackground(imgSource) {
     throw new Error("Error removing background: " + error);
   }
 }
-async function saveImage2(imageUrl, imagesDir) {
-  const fileName = path.basename(imageUrl);
-  const filePath = path.resolve(imagesDir, fileName);
-  try {
-    const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
-    await fs.mkdir(path.dirname(filePath), { recursive: true });
-    await fs.writeFile(filePath, response.data);
-  } catch (error) {
-    console.error(`Error saving image ${imageUrl}:`, error);
-  }
-}
-// Function to apply augmentations using Jimp
-const applyAugmentations = async (image, outputDir, baseName) => {
-  const augmentations = [
-    {
-      name: "Original",
-      flip: false,
-      rotate: 0,
-      brightness: 0,
-      contrast: 0,
-      blur: 0,
-      noise: false,
-    },
-    {
-      name: "Horizontal Flip",
-      flip: "horizontal",
-      rotate: 0,
-      brightness: 0,
-      contrast: 0,
-      blur: 0,
-      noise: false,
-    },
-    {
-      name: "Rotate 15°",
-      flip: false,
-      rotate: 15,
-      brightness: 0,
-      contrast: 0,
-      blur: 0,
-      noise: false,
-    },
-    {
-      name: "Brightness +50%",
-      flip: false,
-      rotate: 0,
-      brightness: 0.5,
-      contrast: 0,
-      blur: 0,
-      noise: false,
-    },
-    {
-      name: "Blur 5px",
-      flip: false,
-      rotate: 0,
-      brightness: 0,
-      contrast: 0,
-      blur: 5,
-      noise: false,
-    },
-    {
-      name: "Random Noise",
-      flip: false,
-      rotate: 0,
-      brightness: 0,
-      contrast: 0,
-      blur: 0,
-      noise: true,
-    },
-  ];
-
-  for (const aug of augmentations) {
-    let augmentedImage = image.clone();
-
-    if (aug.flip === "horizontal") {
-      augmentedImage.flip(true, false);
-    }
-    if (aug.rotate) {
-      augmentedImage.rotate(aug.rotate);
-    }
-    if (aug.brightness !== 0) {
-      augmentedImage.brightness(aug.brightness);
-    }
-    if (aug.blur > 0) {
-      augmentedImage.blur(aug.blur);
-    }
-    if (aug.noise) {
-      augmentedImage.noise(50);
-    }
-
-    const outputFilePath = path.join(outputDir, `${baseName}-${aug.name}.jpg`);
-    await saveImage2(outputDir, `${baseName}-${aug.name}.jpg`);
-    console.log(`Saved augmented image: ${outputFilePath}`);
-  }
-};
 
 // Function to save images to disk and apply augmentation
 async function saveImage(imageUrl, imagesDir, index) {
   const mainImageUrl = imageUrl.replace("home", "large");
   const fileName = path.basename(mainImageUrl);
+
   const filePath = path.resolve(imagesDir, `${index}-${fileName}`);
 
   try {
@@ -143,9 +102,11 @@ async function saveImage(imageUrl, imagesDir, index) {
     await fs.writeFile(filePath, base64Image, { encoding: "base64" });
     console.log(`Image saved after background removal: ${filePath}`);
 
-    // Step 3: Load the saved image into Jimp and apply augmentations
-    const image = await Jimp.read(filePath);
-    await applyAugmentations(image, imagesDir, `aug-${index}-${fileName}`);
+    // image augmentations
+    await imagesIcrease(
+      filePath,
+      "file:///C:/Users/ASUS/Desktop/Image-scrapping/index.html"
+    );
   } catch (error) {
     console.error(`Error processing image ${mainImageUrl}:`, error.message);
   }
@@ -189,20 +150,27 @@ async function main() {
   const page = await browser.newPage();
 
   try {
-    for (const [index, url] of urls.entries()) {
-      const imageUrls = await extractImagesFromPage(
-        page,
-        "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html"
-      );
-      console.log(`Processing ${index + 1} of ${urls.length}`);
+    const imageUrls = await extractImagesFromPage(
+      page,
+      "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html"
+    );
+    // Save and augment images
+    await Promise.all(
+      imageUrls.map((imageUrl, imgIndex) =>
+        saveImage(imageUrl, imagesDir, imgIndex)
+      )
+    );
+    // for (const [index, url] of urls.entries()) {
+    //   const imageUrls = await extractImagesFromPage(page, url);
+    //   console.log(`Processing ${index + 1} of ${urls.length}`);
 
-      // Save and augment images
-      await Promise.all(
-        imageUrls.map((imageUrl, imgIndex) =>
-          saveImage(imageUrl, imagesDir, imgIndex)
-        )
-      );
-    }
+    //   // Save and augment images
+    //   await Promise.all(
+    //     imageUrls.map((imageUrl, imgIndex) =>
+    //       saveImage(imageUrl, imagesDir, imgIndex)
+    //     )
+    //   );
+    // }
   } catch (error) {
     console.error("Error during processing:", error);
   } finally {
