@@ -1,18 +1,14 @@
 import axios from "axios";
 import puppeteer from "puppeteer";
 import xml2js from "xml2js";
-
 import fs from "fs/promises";
-
 import path from "path";
-
 import { removeBackground } from "@imgly/background-removal-node";
 import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-const __dirname = path.dirname(__filename); // get the name of the directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// const sharp = require("sharp");
 // Function to get URLs from the sitemap
 async function getSitemapUrls(sitemapUrl) {
   try {
@@ -24,6 +20,83 @@ async function getSitemapUrls(sitemapUrl) {
     return [];
   }
 }
+
+// Function to save canvas images
+async function saveCanvasToFile(page, canvasData, imageName, savePath) {
+  const base64Data = canvasData.replace(/^data:image\/png;base64,/, "");
+
+  // Ensure the write operation is awaited
+  await fs.writeFile(
+    path.join(savePath, `${imageName}.png`),
+    base64Data,
+    "base64"
+  );
+}
+
+// Function to wait and extract canvas elements
+async function extractCanvasElements(page, retryLimit = 3) {
+  let retryCount = 0;
+  while (retryCount < retryLimit) {
+    try {
+      // Wait for the canvas to be present on the page
+      await page.waitForSelector("#output canvas", { timeout: 5000 });
+      const canvasData = await page.$$eval("#output canvas", (canvases) =>
+        canvases.map((canvas) => canvas.toDataURL())
+      );
+      return canvasData;
+    } catch (error) {
+      console.error("Error extracting canvas elements, retrying...", error);
+      retryCount++;
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // wait before retrying
+    }
+  }
+  throw new Error("Failed to extract canvas elements after retries.");
+}
+
+async function imagesIcrease(imageName, pageUrl, fileName) {
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
+
+  try {
+    await page.goto(pageUrl, {
+      waitUntil: "networkidle2",
+      timeout: 0, // No timeout
+    });
+
+    // Simulate image upload
+    const inputUploadHandle = await page.$("#uploadImage");
+    const imagePath = path.resolve(__dirname, imageName);
+    await inputUploadHandle.uploadFile(imagePath);
+
+    const saveDirectory = path.join(
+      __dirname,
+      `augmented_images/${fileName.slice(fileName.indexOf("-") + 1)}`
+    );
+    try {
+      await fs.access(saveDirectory);
+    } catch (error) {
+      await fs.mkdir(saveDirectory, { recursive: true });
+    }
+
+    // Extract canvas elements with retries
+    const canvasElements = await extractCanvasElements(page);
+
+    for (let i = 0; i < canvasElements.length; i++) {
+      await saveCanvasToFile(
+        page,
+        canvasElements[i],
+        `${i}${fileName}`,
+        saveDirectory
+      );
+    }
+  } catch (error) {
+    console.error("Error in imagesIcrease:", error);
+  } finally {
+    await browser.close();
+  }
+}
+
+// Function to remove the background from an image
 async function removeImageBackground(imgSource) {
   try {
     const blob = await removeBackground(imgSource);
@@ -34,23 +107,42 @@ async function removeImageBackground(imgSource) {
     throw new Error("Error removing background: " + error);
   }
 }
+
+// Function to save images to disk and apply augmentation
+async function saveImage(imageUrl, imagesDir, index) {
+  const mainImageUrl = imageUrl.replace("home", "large");
+  const fileName = path.basename(mainImageUrl);
+  const filePath = path.resolve(imagesDir, `${index}-${fileName}`);
+
+  try {
+    const resultDataURL = await removeImageBackground(mainImageUrl);
+    const base64Image = resultDataURL.split(";base64,").pop();
+
+    await fs.writeFile(filePath, base64Image, { encoding: "base64" });
+
+    await imagesIcrease(
+      filePath,
+      "file:///C:/Users/THANOS/Desktop/master/Image-scrapping/index.html",
+      `${index}-${fileName.substring(0, fileName.lastIndexOf("."))}`
+    );
+  } catch (error) {
+    console.error(`Error processing image ${mainImageUrl}:`, error.message);
+  }
+}
+
 // Function to extract images from a single page
 async function extractImagesFromPage(page, url) {
-  // Navigate to the page
   await page.goto(url, { waitUntil: "networkidle2" });
 
-  // Extract image URLs using page.evaluate
   return await page.evaluate(() => {
-    // Get all image elements
     try {
       if (
         document.querySelectorAll(".breadcrumb.hidden-sm-down>ol>li>a>span")[2]
           .textContent === "Capteurs"
       ) {
-        // Return their src attributes
-        return Array.from(document.querySelectorAll(".col-md-6 img")).map(
-          (img) => img.src
-        );
+        return Array.from(
+          document.querySelectorAll(".col-md-6 .thumb-container img")
+        ).map((img) => img.src);
       } else {
         return [];
       }
@@ -61,49 +153,30 @@ async function extractImagesFromPage(page, url) {
   });
 }
 
-// Function to save images to disk
-async function saveImage(imageUrl, imagesDir) {
-  const fileName = path.basename(imageUrl);
-  const filePath = path.resolve(imagesDir, fileName);
-  try {
-    const resultDataURL = await removeImageBackground(imageUrl);
-    fs.writeFile("output.png", resultDataURL.split(";base64,").pop(), {
-      encoding: "base64",
-    });
-
-    console.log("Background removed successfully.");
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-  try {
-    const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
-    await fs.mkdir(path.dirname(filePath), { recursive: true });
-    await fs.writeFile(filePath, response.data);
-    await fs.appendFile("file.txt", imageUrl + "\n");
-  } catch (error) {
-    console.error(`Error saving image ${imageUrl}:`, error);
-  }
-}
-
 // Main function
 async function main() {
   const sitemapUrl = "https://www.alliantech.com/1_fr_0_sitemap.xml"; // Replace with your sitemap URL
   const imagesDir = path.resolve(__dirname, "images");
+
+  await fs.mkdir(imagesDir, { recursive: true });
+
   const urls = await getSitemapUrls(sitemapUrl);
   if (urls.length === 0) return;
+
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
+
   try {
-    for (const [index, url] of urls.entries()) {
-      const imageUrls = await extractImagesFromPage(page, url);
-      console.log(`Processing ${index + 1} of ${urls.length}`);
-      // Use Promise.all to handle parallel saving of images
-      await Promise.all(
-        imageUrls.map((imageUrl) => {
-          saveImage(imageUrl, imagesDir);
-        })
-      );
-    }
+    const imageUrls = await extractImagesFromPage(
+      page,
+      "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html"
+    );
+
+    await Promise.all(
+      imageUrls.map((imageUrl, imgIndex) =>
+        saveImage(imageUrl, imagesDir, imgIndex)
+      )
+    );
   } catch (error) {
     console.error("Error during processing:", error);
   } finally {

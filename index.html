@@ -11,8 +11,8 @@
     <style>
       /* General body styles */
       body {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(to right, #f0f4f8, #dfe9f3);
+        font-family: "Poppins", sans-serif;
+        background-color: #f0f4f8;
         margin: 0;
         padding: 0;
         color: #2c3e50;
@@ -23,13 +23,13 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 40px 20px;
-        text-align: center;
       }
 
       /* Title styling */
       h1 {
+        text-align: center;
         font-size: 3rem;
-        font-weight: 700;
+        font-weight: 600;
         color: #34495e;
         margin-bottom: 30px;
         text-transform: uppercase;
@@ -38,21 +38,22 @@
 
       /* Input button styling */
       #uploadImage {
+        display: block;
+        margin: 0 auto 40px;
         padding: 12px 30px;
         font-size: 1.2rem;
         font-weight: 500;
-        border: none;
-        border-radius: 50px;
+        border: 2px solid #3498db;
+        border-radius: 30px;
         background-color: #3498db;
         color: white;
         cursor: pointer;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
       }
 
       #uploadImage:hover {
         background-color: #2980b9;
-        transform: translateY(-3px);
+        border-color: #2980b9;
       }
 
       /* Grid layout for output images */
@@ -64,34 +65,29 @@
         padding: 0 20px;
       }
 
-      /* Card for each augmented image */
-      .card {
-        background-color: white;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-      }
-
-      .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
-      }
-
-      /* Image styling */
+      /* Individual image containers */
       canvas {
         width: 100%;
         height: auto;
-        border-radius: 10px;
-        margin-bottom: 10px;
+        border-radius: 15px;
+        border: 1px solid #ecf0f1;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      canvas:hover {
+        transform: scale(1.08);
+        box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
       }
 
       /* Augmentation label text */
       p {
-        font-weight: 500;
+        text-align: center;
+        font-weight: 400;
         font-size: 1.1rem;
         color: #34495e;
-        margin: 10px 0;
+        margin: 15px 0 5px;
+        letter-spacing: 0.5px;
       }
 
       /* Footer */
@@ -125,7 +121,7 @@
       <div id="output"></div>
     </div>
 
-    <footer>&copy; 2024 YOLOv8 Image Augmentation</footer>
+    <footer>&copy; 2024 Image Augmentation Platform</footer>
 
     <script>
       document
@@ -155,18 +151,138 @@
 
         // Augmentation parameters
         const augmentations = [
-          { name: "Original", flip: false, rotate: 0, brightness: 1, contrast: 1, zoom: 1, crop: false, noise: false, blur: 0 },
-          { name: "Horizontal Flip", flip: "horizontal", rotate: 0, brightness: 1, contrast: 1, zoom: 1, crop: false, noise: false, blur: 0 },
-          { name: "Vertical Flip", flip: "vertical", rotate: 0, brightness: 1, contrast: 1, zoom: 1, crop: false, noise: false, blur: 0 },
-          { name: "Rotation 15°", flip: false, rotate: 15, brightness: 1, contrast: 1, zoom: 1, crop: false, noise: false, blur: 0 },
-          { name: "Rotation -15°", flip: false, rotate: -15, brightness: 1, contrast: 1, zoom: 1, crop: false, noise: false, blur: 0 },
-          { name: "Zoom In", flip: false, rotate: 0, brightness: 1, contrast: 1, zoom: 1.2, crop: false, noise: false, blur: 0 },
-          { name: "Zoom Out", flip: false, rotate: 0, brightness: 1, contrast: 1, zoom: 0.8, crop: false, noise: false, blur: 0 },
-          { name: "Brightness +50%", flip: false, rotate: 0, brightness: 1.5, contrast: 1, zoom: 1, crop: false, noise: false, blur: 0 },
-          { name: "Contrast +50%", flip: false, rotate: 0, brightness: 1, contrast: 1.5, zoom: 1, crop: false, noise: false, blur: 0 },
-          { name: "Blur 5px", flip: false, rotate: 0, brightness: 1, contrast: 1, zoom: 1, crop: false, noise: false, blur: 5 },
-          { name: "Random Noise", flip: false, rotate: 0, brightness: 1, contrast: 1, zoom: 1, crop: false, noise: true, blur: 0 },
-          { name: "Random Crop", flip: false, rotate: 0, brightness: 1, contrast: 1, zoom: 1, crop: true, noise: false, blur: 0 },
+          {
+            name: "Original",
+            flip: false,
+            rotate: 0,
+            brightness: 1,
+            contrast: 1,
+            zoom: 1,
+            crop: false,
+            noise: false,
+            blur: 0,
+          },
+          {
+            name: "Horizontal Flip",
+            flip: "horizontal",
+            rotate: 0,
+            brightness: 1,
+            contrast: 1,
+            zoom: 1,
+            crop: false,
+            noise: false,
+            blur: 0,
+          },
+          {
+            name: "Vertical Flip",
+            flip: "vertical",
+            rotate: 0,
+            brightness: 1,
+            contrast: 1,
+            zoom: 1,
+            crop: false,
+            noise: false,
+            blur: 0,
+          },
+          {
+            name: "Rotation 15°",
+            flip: false,
+            rotate: 15,
+            brightness: 1,
+            contrast: 1,
+            zoom: 1,
+            crop: false,
+            noise: false,
+            blur: 0,
+          },
+          {
+            name: "Rotation -15°",
+            flip: false,
+            rotate: -15,
+            brightness: 1,
+            contrast: 1,
+            zoom: 1,
+            crop: false,
+            noise: false,
+            blur: 0,
+          },
+          {
+            name: "Zoom In",
+            flip: false,
+            rotate: 0,
+            brightness: 1,
+            contrast: 1,
+            zoom: 1.2,
+            crop: false,
+            noise: false,
+            blur: 0,
+          },
+          {
+            name: "Zoom Out",
+            flip: false,
+            rotate: 0,
+            brightness: 1,
+            contrast: 1,
+            zoom: 0.8,
+            crop: false,
+            noise: false,
+            blur: 0,
+          },
+          {
+            name: "Brightness +50%",
+            flip: false,
+            rotate: 0,
+            brightness: 1.5,
+            contrast: 1,
+            zoom: 1,
+            crop: false,
+            noise: false,
+            blur: 0,
+          },
+          {
+            name: "Contrast +50%",
+            flip: false,
+            rotate: 0,
+            brightness: 1,
+            contrast: 1.5,
+            zoom: 1,
+            crop: false,
+            noise: false,
+            blur: 0,
+          },
+          {
+            name: "Blur 5px",
+            flip: false,
+            rotate: 0,
+            brightness: 1,
+            contrast: 1,
+            zoom: 1,
+            crop: false,
+            noise: false,
+            blur: 5,
+          },
+          {
+            name: "Random Noise",
+            flip: false,
+            rotate: 0,
+            brightness: 1,
+            contrast: 1,
+            zoom: 1,
+            crop: false,
+            noise: true,
+            blur: 0,
+          },
+          {
+            name: "Random Crop",
+            flip: false,
+            rotate: 0,
+            brightness: 1,
+            contrast: 1,
+            zoom: 1,
+            crop: true,
+            noise: false,
+            blur: 0,
+          },
         ];
         augmentations.forEach((aug) => {
           const canvas = createAugmentedCanvas(image, aug);

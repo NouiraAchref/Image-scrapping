@@ -4,7 +4,6 @@ import xml2js from "xml2js";
 import fs from "fs/promises";
 import path from "path";
 import { removeBackground } from "@imgly/background-removal-node";
-import { Jimp } from "jimp";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url); // Get the resolved path to the file
@@ -22,6 +21,60 @@ async function getSitemapUrls(sitemapUrl) {
   }
 }
 
+// Function to save canvas image to a file
+async function saveCanvasToFile(page, selector, imageName, savePath) {
+  const dataUrl = await page.$eval(selector, (canvas) => canvas.toDataURL());
+  const base64Data = dataUrl.replace(/^data:image\/png;base64,/, "");
+
+  // Ensure to await the write operation
+  await fs.writeFile(
+    path.join(savePath, `${imageName}.png`),
+    base64Data,
+    "base64"
+  );
+}
+
+async function imagesIcrease(imageName, pageUrl) {
+  console.log("dd", imageName);
+  // Launch browser
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
+
+  // Navigate to your page
+  await page.goto(pageUrl, {
+    waitUntil: "load",
+  });
+
+  // Simulate image upload
+  const inputUploadHandle = await page.$("#uploadImage");
+  const imagePath = path.resolve(__dirname, imageName);
+  await inputUploadHandle.uploadFile(imagePath);
+  const saveDirectory = path.join(__dirname, "augmented_images");
+  // Define the directory to save images
+  try {
+    // Check if the directory exists
+    await fs.access(saveDirectory);
+  } catch (error) {
+    // Directory doesn't exist, so create it
+    await fs.mkdir(saveDirectory, { recursive: true });
+  }
+
+  // Get all canvas elements (augmented images)
+  const canvasElements = await page.$$("#output canvas");
+
+  for (let i = 0; i < canvasElements.length; i++) {
+    await saveCanvasToFile(
+      page,
+      `#output canvas:nth-of-type(${i + 1})`,
+      i,
+      saveDirectory
+    );
+  }
+
+  console.log("Images saved to:", saveDirectory);
+
+  await browser.close();
+}
 // Function to remove the background from an image
 async function removeImageBackground(imgSource) {
   try {
@@ -50,6 +103,10 @@ async function saveImage(imageUrl, imagesDir, index) {
     console.log(`Image saved after background removal: ${filePath}`);
 
     // image augmentations
+    await imagesIcrease(
+      filePath,
+      "file:///C:/Users/THANOS/Desktop/master/Image-scrapping/index.html"
+    );
   } catch (error) {
     console.error(`Error processing image ${mainImageUrl}:`, error.message);
   }
