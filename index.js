@@ -167,16 +167,27 @@ async function main() {
   const page = await browser.newPage();
 
   try {
-    const imageUrls = await extractImagesFromPage(
-      page,
-      "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html"
-    );
+    // const imageUrls = await extractImagesFromPage(
+    //   page,
+    //   "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html"
+    // );
 
-    await Promise.all(
-      imageUrls.map((imageUrl, imgIndex) =>
-        saveImage(imageUrl, imagesDir, imgIndex)
-      )
-    );
+    // await Promise.all(
+    //   imageUrls.map((imageUrl, imgIndex) =>
+    //     saveImage(imageUrl, imagesDir, imgIndex)
+    //   )
+    // );
+    for (const [index, url] of urls.entries()) {
+      const imageUrls = await extractImagesFromPage(page, url);
+      console.log(`Processing ${index + 1} of ${urls.length}`);
+
+      // Save and augment images
+      await Promise.all(
+        imageUrls.map((imageUrl, imgIndex) =>
+          saveImage(imageUrl, imagesDir, imgIndex)
+        )
+      );
+    }
   } catch (error) {
     console.error("Error during processing:", error);
   } finally {
