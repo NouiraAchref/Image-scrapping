@@ -122,35 +122,119 @@ async function saveImage(imageUrl, imagesDir, index) {
 
     await imagesIcrease(
       filePath,
-      "file:///C:/Users/THANOS/Desktop/master/Image-scrapping/index.html",
+      "file:///C:/Users/THANOS/Desktop/New%20folder/Image-scrapping/index.html",
       `${index}-${fileName.substring(0, fileName.lastIndexOf("."))}`
     );
   } catch (error) {
     console.error(`Error processing image ${mainImageUrl}:`, error.message);
   }
 }
+async function writeJsonToFile(
+  filePath,
+  id,
+  name,
+  modal,
+  datasheet,
+  userManual,
+  link
+) {
+  try {
+    const jsonData = {
+      id: id,
+      name: name,
+      model: modal,
+      datasheet: datasheet,
+      userManual: userManual,
+      link: link,
+    };
 
-// Function to extract images from a single page
+    const jsonString = JSON.stringify(jsonData, null, 2);
+    await fs.writeFile(filePath, jsonString);
+
+    console.log(`JSON data written successfully to ${filePath}`);
+  } catch (err) {
+    console.error(`Error writing JSON to file: ${filePath}`, err);
+    throw err; // Rethrow to handle it if needed by the caller
+  }
+}
+
 async function extractImagesFromPage(page, url) {
-  await page.goto(url, { waitUntil: "networkidle2" });
+  try {
+    await page.goto(url, { waitUntil: "networkidle2" });
 
-  return await page.evaluate(() => {
-    try {
-      if (
-        document.querySelectorAll(".breadcrumb.hidden-sm-down>ol>li>a>span")[2]
-          .textContent === "Capteurs"
-      ) {
-        return Array.from(
-          document.querySelectorAll(".col-md-6 .thumb-container img")
-        ).map((img) => img.src);
-      } else {
-        return [];
-      }
-    } catch (error) {
-      console.log(error);
-      return [];
+    const { images, productTitle, productModal, datasheet, userManual } =
+      await page.evaluate(() => {
+        try {
+          const breadcrumbText = document.querySelectorAll(
+            ".breadcrumb.hidden-sm-down>ol>li>a>span"
+          )[2]?.textContent;
+          if (breadcrumbText !== "Capteurs") {
+            return {
+              images: [],
+              productTitle: null,
+              productModal: null,
+              datasheet: null,
+              userManual: null,
+            };
+          }
+
+          const productTitle =
+            document.querySelector(".col-md-6 .h1.product-h1")?.textContent ||
+            null;
+          const productModal =
+            document.querySelector(".col-md-6 .product-h2")?.textContent ||
+            null;
+
+          const datasheetLink = document.querySelectorAll(
+            ".product-info-btn-column a"
+          )[0];
+          const datasheet = datasheetLink
+            ? "https://www.alliantech.com/" + datasheetLink.getAttribute("href")
+            : "";
+
+          const userManualLink = document.querySelectorAll(
+            ".product-info-btn-column a"
+          )[1];
+          const userManual = userManualLink
+            ? "https://www.alliantech.com/" +
+              userManualLink.getAttribute("href")
+            : "";
+
+          const images = Array.from(
+            document.querySelectorAll(".col-md-6 .thumb-container img")
+          ).map((img) => img.src);
+
+          return { images, productTitle, productModal, datasheet, userManual };
+        } catch (error) {
+          console.error("Error extracting data from page:", error);
+          return {
+            images: [],
+            productTitle: null,
+            productModal: null,
+            datasheet: null,
+            userManual: null,
+          };
+        }
+      });
+
+    if (images.length > 0 && productTitle) {
+      const imageId = path.basename(images[0]);
+      await writeJsonToFile(
+        "productsInfo.txt",
+        imageId,
+        productTitle,
+        productModal,
+        datasheet,
+        userManual,
+        url
+      );
     }
-  });
+
+    return images;
+  } catch (error) {
+    console.error(`Error processing page: ${url}`, error);
+    throw error; // Propagate the error for further handling
+  }
 }
 
 // Main function
