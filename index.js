@@ -9,6 +9,9 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const NAVIGATION_TIMEOUT = 60000; // Set navigation timeout to 60 seconds
+const RETRY_LIMIT = 3; // Set retry limit for page navigation
+
 // Function to get URLs from the sitemap
 async function getSitemapUrls(sitemapUrl) {
   try {
@@ -24,8 +27,6 @@ async function getSitemapUrls(sitemapUrl) {
 // Function to save canvas images
 async function saveCanvasToFile(page, canvasData, imageName, savePath) {
   const base64Data = canvasData.replace(/^data:image\/png;base64,/, "");
-
-  // Ensure the write operation is awaited
   await fs.writeFile(
     path.join(savePath, `${imageName}.png`),
     base64Data,
@@ -34,11 +35,10 @@ async function saveCanvasToFile(page, canvasData, imageName, savePath) {
 }
 
 // Function to wait and extract canvas elements
-async function extractCanvasElements(page, retryLimit = 3) {
+async function extractCanvasElements(page, retryLimit = RETRY_LIMIT) {
   let retryCount = 0;
   while (retryCount < retryLimit) {
     try {
-      // Wait for the canvas to be present on the page
       await page.waitForSelector("#output canvas", { timeout: 5000 });
       const canvasData = await page.$$eval("#output canvas", (canvases) =>
         canvases.map((canvas) => canvas.toDataURL())
@@ -47,7 +47,7 @@ async function extractCanvasElements(page, retryLimit = 3) {
     } catch (error) {
       console.error("Error extracting canvas elements, retrying...", error);
       retryCount++;
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // wait before retrying
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
   }
   throw new Error("Failed to extract canvas elements after retries.");
@@ -60,10 +60,9 @@ async function imagesIcrease(imageName, pageUrl, fileName) {
   try {
     await page.goto(pageUrl, {
       waitUntil: "networkidle2",
-      timeout: 0, // No timeout
+      timeout: 0,
     });
 
-    // Simulate image upload
     const inputUploadHandle = await page.$("#uploadImage");
     const imagePath = path.resolve(__dirname, imageName);
     await inputUploadHandle.uploadFile(imagePath);
@@ -78,7 +77,6 @@ async function imagesIcrease(imageName, pageUrl, fileName) {
       await fs.mkdir(saveDirectory, { recursive: true });
     }
 
-    // Extract canvas elements with retries
     const canvasElements = await extractCanvasElements(page);
 
     for (let i = 0; i < canvasElements.length; i++) {
@@ -122,13 +120,14 @@ async function saveImage(imageUrl, imagesDir, index) {
 
     await imagesIcrease(
       filePath,
-      "file:///C:/Users/THANOS/Desktop/New%20folder/Image-scrapping/index.html",
+      "file:///C:/Users/Internet/Desktop/Projects/Image-scrapping/index.html",
       `${index}-${fileName.substring(0, fileName.lastIndexOf("."))}`
     );
   } catch (error) {
     console.error(`Error processing image ${mainImageUrl}:`, error.message);
   }
 }
+
 async function writeJsonToFile(
   filePath,
   id,
@@ -139,8 +138,11 @@ async function writeJsonToFile(
   link
 ) {
   try {
-    const jsonData = {
-      id: id,
+    // Use path.parse to get the filename without extension
+    const fileNameWithoutExt = path.parse(id).name;
+
+    const newJsonData = {
+      id: fileNameWithoutExt, // Use the name without extension
       name: name,
       model: modal,
       datasheet: datasheet,
@@ -148,27 +150,94 @@ async function writeJsonToFile(
       link: link,
     };
 
-    const jsonString = JSON.stringify(jsonData, null, 2);
+    // Check if the file already exists
+    let fileContent = [];
+
+    try {
+      // If file exists, read the existing content
+      const existingContent = await fs.readFile(filePath, "utf-8");
+      fileContent = JSON.parse(existingContent);
+    } catch (err) {
+      // If the file doesn't exist, initialize with an empty array
+      if (err.code !== "ENOENT") throw err; // Only throw if it's not a 'file not found' error
+    }
+
+    // Append new data to the existing content
+    fileContent.push(newJsonData);
+
+    // Write the updated content back to the file
+    const jsonString = JSON.stringify(fileContent, null, 2);
     await fs.writeFile(filePath, jsonString);
 
-    console.log(`JSON data written successfully to ${filePath}`);
+    console.log(`JSON data successfully appended to ${filePath}`);
   } catch (err) {
     console.error(`Error writing JSON to file: ${filePath}`, err);
-    throw err; // Rethrow to handle it if needed by the caller
+    throw err;
   }
 }
 
-async function extractImagesFromPage(page, url) {
-  try {
-    await page.goto(url, { waitUntil: "networkidle2" });
+// Function to extract images and metadata from a page with retry logic
+async function extractImagesFromPage(page, url, retryLimit = RETRY_LIMIT) {
+  let retryCount = 0;
+  while (retryCount < retryLimit) {
+    try {
+      await page.goto(url, {
+        waitUntil: "networkidle2",
+        timeout: NAVIGATION_TIMEOUT,
+      });
 
-    const { images, productTitle, productModal, datasheet, userManual } =
-      await page.evaluate(() => {
-        try {
-          const breadcrumbText = document.querySelectorAll(
-            ".breadcrumb.hidden-sm-down>ol>li>a>span"
-          )[2]?.textContent;
-          if (breadcrumbText !== "Capteurs") {
+      const { images, productTitle, productModal, datasheet, userManual } =
+        await page.evaluate(() => {
+          try {
+            const breadcrumbText = document.querySelectorAll(
+              ".breadcrumb.hidden-sm-down>ol>li>a>span"
+            )[2]?.textContent;
+            if (breadcrumbText !== "Capteurs") {
+              return {
+                images: [],
+                productTitle: null,
+                productModal: null,
+                datasheet: null,
+                userManual: null,
+              };
+            }
+
+            const productTitle =
+              document.querySelector(".col-md-6 .h1.product-h1")?.textContent ||
+              null;
+            const productModal =
+              document.querySelector(".col-md-6 .product-h2")?.textContent ||
+              null;
+
+            const datasheetLink = document.querySelectorAll(
+              ".product-info-btn-column a"
+            )[0];
+            const datasheet = datasheetLink
+              ? "https://www.alliantech.com/" +
+                datasheetLink.getAttribute("href")
+              : "";
+
+            const userManualLink = document.querySelectorAll(
+              ".product-info-btn-column a"
+            )[1];
+            const userManual = userManualLink
+              ? "https://www.alliantech.com/" +
+                userManualLink.getAttribute("href")
+              : "";
+
+            const images = Array.from(
+              document.querySelectorAll(".col-md-6 .thumb-container img")
+            ).map((img) => img.src);
+
+            return {
+              images,
+              productTitle,
+              productModal,
+              datasheet,
+              userManual,
+            };
+          } catch (error) {
+            console.error("Error extracting data from page:", error);
             return {
               images: [],
               productTitle: null,
@@ -177,69 +246,37 @@ async function extractImagesFromPage(page, url) {
               userManual: null,
             };
           }
+        });
 
-          const productTitle =
-            document.querySelector(".col-md-6 .h1.product-h1")?.textContent ||
-            null;
-          const productModal =
-            document.querySelector(".col-md-6 .product-h2")?.textContent ||
-            null;
+      if (images.length > 0 && productTitle) {
+        const imageId = path.basename(images[0]);
+        await writeJsonToFile(
+          "productsInfo.txt",
+          imageId,
+          productTitle,
+          productModal,
+          datasheet,
+          userManual,
+          url
+        );
+      }
 
-          const datasheetLink = document.querySelectorAll(
-            ".product-info-btn-column a"
-          )[0];
-          const datasheet = datasheetLink
-            ? "https://www.alliantech.com/" + datasheetLink.getAttribute("href")
-            : "";
-
-          const userManualLink = document.querySelectorAll(
-            ".product-info-btn-column a"
-          )[1];
-          const userManual = userManualLink
-            ? "https://www.alliantech.com/" +
-              userManualLink.getAttribute("href")
-            : "";
-
-          const images = Array.from(
-            document.querySelectorAll(".col-md-6 .thumb-container img")
-          ).map((img) => img.src);
-
-          return { images, productTitle, productModal, datasheet, userManual };
-        } catch (error) {
-          console.error("Error extracting data from page:", error);
-          return {
-            images: [],
-            productTitle: null,
-            productModal: null,
-            datasheet: null,
-            userManual: null,
-          };
-        }
-      });
-
-    if (images.length > 0 && productTitle) {
-      const imageId = path.basename(images[0]);
-      await writeJsonToFile(
-        "productsInfo.txt",
-        imageId,
-        productTitle,
-        productModal,
-        datasheet,
-        userManual,
-        url
-      );
+      return images;
+    } catch (error) {
+      console.error(`Error processing page: ${url}, retrying...`, error);
+      retryCount++;
+      await new Promise((resolve) => setTimeout(resolve, 3000)); // wait before retrying
     }
-
-    return images;
-  } catch (error) {
-    console.error(`Error processing page: ${url}`, error);
-    throw error; // Propagate the error for further handling
   }
+
+  throw new Error(
+    `Failed to process page after ${RETRY_LIMIT} retries: ${url}`
+  );
 }
 
-// Main function
+// Main function to process the sitemap and images
 async function main() {
-  const sitemapUrl = "https://www.alliantech.com/1_fr_0_sitemap.xml"; // Replace with your sitemap URL
+  const sitemapUrl = "https://www.alliantech.com/1_fr_0_sitemap.xml";
   const imagesDir = path.resolve(__dirname, "images");
 
   await fs.mkdir(imagesDir, { recursive: true });
@@ -251,21 +288,10 @@ async function main() {
   const page = await browser.newPage();
 
   try {
-    // const imageUrls = await extractImagesFromPage(
-    //   page,
-    //   "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html"
-    // );
-
-    // await Promise.all(
-    //   imageUrls.map((imageUrl, imgIndex) =>
-    //     saveImage(imageUrl, imagesDir, imgIndex)
-    //   )
-    // );
     for (const [index, url] of urls.entries()) {
-      const imageUrls = await extractImagesFromPage(page, url);
       console.log(`Processing ${index + 1} of ${urls.length}`);
+      const imageUrls = await extractImagesFromPage(page, url);
 
-      // Save and augment images
       await Promise.all(
         imageUrls.map((imageUrl, imgIndex) =>
           saveImage(imageUrl, imagesDir, imgIndex)
