@@ -25,7 +25,7 @@ async function getSitemapUrls(sitemapUrl) {
 }
 
 // Function to save canvas images
-async function saveCanvasToFile(page, canvasData, imageName, savePath) {
+async function saveCanvasToFile(canvasData, imageName, savePath) {
   const base64Data = canvasData.replace(/^data:image\/png;base64,/, "");
   await fs.writeFile(
     path.join(savePath, `${imageName}.png`),
@@ -53,7 +53,7 @@ async function extractCanvasElements(page, retryLimit = RETRY_LIMIT) {
   throw new Error("Failed to extract canvas elements after retries.");
 }
 
-async function imagesIcrease(imageName, pageUrl, fileName) {
+async function imagesIcrease(imageName, pageUrl, fileName, model) {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
@@ -69,7 +69,7 @@ async function imagesIcrease(imageName, pageUrl, fileName) {
 
     const saveDirectory = path.join(
       __dirname,
-      `augmented_images/${fileName.slice(fileName.indexOf("-") + 1)}`
+      `augmented_images/${model}-${fileName.slice(fileName.indexOf("-") + 1)}`
     );
     try {
       await fs.access(saveDirectory);
@@ -81,9 +81,8 @@ async function imagesIcrease(imageName, pageUrl, fileName) {
 
     for (let i = 0; i < canvasElements.length; i++) {
       await saveCanvasToFile(
-        page,
         canvasElements[i],
-        `${i}${fileName}`,
+        `${i}-${model}-${fileName}`,
         saveDirectory
       );
     }
@@ -107,10 +106,10 @@ async function removeImageBackground(imgSource) {
 }
 
 // Function to save images to disk and apply augmentation
-async function saveImage(imageUrl, imagesDir, index) {
+async function saveImage(imageUrl, imagesDir, index, model) {
   const mainImageUrl = imageUrl.replace("home", "large");
   const fileName = path.basename(mainImageUrl);
-  const filePath = path.resolve(imagesDir, `${index}-${fileName}`);
+  const filePath = path.resolve(imagesDir, `${index}-${model}-${fileName}`);
 
   try {
     const resultDataURL = await removeImageBackground(mainImageUrl);
@@ -120,8 +119,9 @@ async function saveImage(imageUrl, imagesDir, index) {
 
     await imagesIcrease(
       filePath,
-      "file:///C:/Users/Internet/Desktop/Projects/Image-scrapping/index.html",
-      `${index}-${fileName.substring(0, fileName.lastIndexOf("."))}`
+      "file:///C:/Users/THANOS/Desktop/Image-scrapping/index.html",
+      `${index}-${fileName.substring(0, fileName.lastIndexOf("."))}`,
+      model
     );
   } catch (error) {
     console.error(`Error processing image ${mainImageUrl}:`, error.message);
@@ -140,9 +140,8 @@ async function writeJsonToFile(
   try {
     // Use path.parse to get the filename without extension
     const fileNameWithoutExt = path.parse(id).name;
-
     const newJsonData = {
-      id: fileNameWithoutExt, // Use the name without extension
+      id: `${modal}-${fileNameWithoutExt}`, // Add the modal as prefix to `fileNameWithoutExt, // Use the name without extension
       name: name,
       model: modal,
       datasheet: datasheet,
@@ -273,7 +272,51 @@ async function extractImagesFromPage(page, url, retryLimit = RETRY_LIMIT) {
     `Failed to process page after ${RETRY_LIMIT} retries: ${url}`
   );
 }
+async function getProductModal(page) {
+  try {
+    // Extract the product modal
+    let productModal = await page.evaluate(() => {
+      return (
+        document.querySelector(".col-md-6 .product-h2")?.textContent || null
+      );
+    });
 
+    // Replace "/" with "-" if found in the productModal
+    if (productModal) {
+      productModal = productModal.replace(/\//g, "-");
+    }
+
+    return productModal;
+  } catch (error) {
+    console.error("Error extracting product modal:", error);
+  }
+}
+
+// Example usage
+const url = "https://example.com/product-page";
+const browser = await puppeteer.launch({ headless: true });
+const page = await browser.newPage();
+
+const model = await getProductModal(page, url);
+console.log("Product Modal (processed):", model);
+
+async function getLinksFromFile(filePath) {
+  try {
+    // Read the file contents
+    const data = await fs.readFile(filePath, "utf8");
+
+    // Parse the JSON from the file
+    const jsonArray = JSON.parse(data);
+
+    // Extract the 'link' property from each entity in the JSON array
+    const links = jsonArray.map((entity) => entity.link).filter((link) => link);
+
+    // Return an array of strings (links)
+    return links;
+  } catch (error) {
+    console.error("Error reading or parsing file:", error);
+  }
+}
 // Main function to process the sitemap and images
 async function main() {
   const sitemapUrl = "https://www.alliantech.com/1_fr_0_sitemap.xml";
@@ -281,20 +324,31 @@ async function main() {
 
   await fs.mkdir(imagesDir, { recursive: true });
 
-  const urls = await getSitemapUrls(sitemapUrl);
+  // const urls = await getSitemapUrls(sitemapUrl);
+  const urls = await getLinksFromFile("./b.txt");
   if (urls.length === 0) return;
-
+  console.log(urls.length);
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   try {
+    // const url =
+    //   "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html";
+    // const imageUrls = await extractImagesFromPage(page, url);
+    // const model = await getProductModal(page, url);
+    // await Promise.all(
+    //   imageUrls.map((imageUrl, imgIndex) =>
+    //     saveImage(imageUrl, imagesDir, imgIndex, model)
+    //   )
+    // );
+
     for (const [index, url] of urls.entries()) {
       console.log(`Processing ${index + 1} of ${urls.length}`);
       const imageUrls = await extractImagesFromPage(page, url);
-
+      const model = await getProductModal(page, url);
       await Promise.all(
         imageUrls.map((imageUrl, imgIndex) =>
-          saveImage(imageUrl, imagesDir, imgIndex)
+          saveImage(imageUrl, imagesDir, imgIndex, model)
         )
       );
     }
