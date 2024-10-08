@@ -135,6 +135,7 @@ async function writeJsonToFile(
   modal,
   datasheet,
   userManual,
+  description,
   link
 ) {
   try {
@@ -146,6 +147,7 @@ async function writeJsonToFile(
       model: modal,
       datasheet: datasheet,
       userManual: userManual,
+      description: description,
       link: link,
     };
 
@@ -185,58 +187,19 @@ async function extractImagesFromPage(page, url, retryLimit = RETRY_LIMIT) {
         timeout: NAVIGATION_TIMEOUT,
       });
 
-      const { images, productTitle, productModal, datasheet, userManual } =
-        await page.evaluate(() => {
-          try {
-            const breadcrumbText = document.querySelectorAll(
-              ".breadcrumb.hidden-sm-down>ol>li>a>span"
-            )[2]?.textContent;
-            if (breadcrumbText !== "Capteurs") {
-              return {
-                images: [],
-                productTitle: null,
-                productModal: null,
-                datasheet: null,
-                userManual: null,
-              };
-            }
-
-            const productTitle =
-              document.querySelector(".col-md-6 .h1.product-h1")?.textContent ||
-              null;
-            const productModal =
-              document.querySelector(".col-md-6 .product-h2")?.textContent ||
-              null;
-
-            const datasheetLink = document.querySelectorAll(
-              ".product-info-btn-column a"
-            )[0];
-            const datasheet = datasheetLink
-              ? "https://www.alliantech.com/" +
-                datasheetLink.getAttribute("href")
-              : "";
-
-            const userManualLink = document.querySelectorAll(
-              ".product-info-btn-column a"
-            )[1];
-            const userManual = userManualLink
-              ? "https://www.alliantech.com/" +
-                userManualLink.getAttribute("href")
-              : "";
-
-            const images = Array.from(
-              document.querySelectorAll(".col-md-6 .thumb-container img")
-            ).map((img) => img.src);
-
-            return {
-              images,
-              productTitle,
-              productModal,
-              datasheet,
-              userManual,
-            };
-          } catch (error) {
-            console.error("Error extracting data from page:", error);
+      const {
+        images,
+        productTitle,
+        productModal,
+        datasheet,
+        userManual,
+        description,
+      } = await page.evaluate(() => {
+        try {
+          const breadcrumbText = document.querySelectorAll(
+            ".breadcrumb.hidden-sm-down>ol>li>a>span"
+          )[2]?.textContent;
+          if (breadcrumbText !== "Capteurs") {
             return {
               images: [],
               productTitle: null,
@@ -245,7 +208,70 @@ async function extractImagesFromPage(page, url, retryLimit = RETRY_LIMIT) {
               userManual: null,
             };
           }
-        });
+
+          const productTitle =
+            document.querySelector(".col-md-6 .h1.product-h1")?.textContent ||
+            null;
+          const productModal =
+            document.querySelector(".col-md-6 .product-h2")?.textContent ||
+            null;
+          const paragraphs = document.querySelectorAll(
+            ".product-information.mt-2 p"
+          );
+          let description = "";
+
+          if (paragraphs && paragraphs.length > 0) {
+            paragraphs.forEach((p, index) => {
+              if (p && p.textContent) {
+                description += p.textContent;
+                if (index < paragraphs.length - 1) {
+                  description += "\n";
+                }
+              }
+            });
+          } else {
+            description = null;
+          }
+
+          const datasheetLink = document.querySelectorAll(
+            ".product-info-btn-column a"
+          )[0];
+          const datasheet = datasheetLink
+            ? "https://www.alliantech.com/" + datasheetLink.getAttribute("href")
+            : "";
+
+          const userManualLink = document.querySelectorAll(
+            ".product-info-btn-column a"
+          )[1];
+          const userManual = userManualLink
+            ? "https://www.alliantech.com/" +
+              userManualLink.getAttribute("href")
+            : "";
+
+          const images = Array.from(
+            document.querySelectorAll(".col-md-6 .thumb-container img")
+          ).map((img) => img.src);
+
+          return {
+            images,
+            productTitle,
+            productModal,
+            datasheet,
+            userManual,
+            description,
+          };
+        } catch (error) {
+          console.error("Error extracting data from page:", error);
+          return {
+            images: [],
+            productTitle: null,
+            productModal: null,
+            datasheet: null,
+            userManual: null,
+            description: null,
+          };
+        }
+      });
 
       if (images.length > 0 && productTitle) {
         const imageId = path.basename(images[0]);
@@ -256,6 +282,7 @@ async function extractImagesFromPage(page, url, retryLimit = RETRY_LIMIT) {
           productModal,
           datasheet,
           userManual,
+          description,
           url
         );
       }
@@ -345,12 +372,12 @@ async function main() {
     for (const [index, url] of urls.entries()) {
       console.log(`Processing ${index + 1} of ${urls.length}`);
       const imageUrls = await extractImagesFromPage(page, url);
-      const model = await getProductModal(page, url);
-      await Promise.all(
-        imageUrls.map((imageUrl, imgIndex) =>
-          saveImage(imageUrl, imagesDir, imgIndex, model)
-        )
-      );
+      // const model = await getProductModal(page, url);
+      // await Promise.all(
+      //   imageUrls.map((imageUrl, imgIndex) =>
+      //     saveImage(imageUrl, imagesDir, imgIndex, model)
+      //   )
+      // );
     }
   } catch (error) {
     console.error("Error during processing:", error);

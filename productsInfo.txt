@@ -5,6 +5,7 @@
     "model": "ARS PRO HG",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/PDF blog/DTS-Datasheet-DTS-ARS-PRO-2017-08.pdf",
     "userManual": "",
+    "description": "Au sein de notre gamme de gyroscopes et de gyromètres, l'ARS HG est le plus petit capteur de vitesse angulaire uniaxial à très haute tenue face aux chocs au monde.\nL'ARS HG est conçu pour mesurer de très fortes vitesses angulaires dans des environnements de test dynamiques. \nÉtendue de mesure : 50 000 °/s\nRéponse en fréquence : de 0 à 2 kHz\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/gyroscopes/9409-capteur-vitesse-angulaire-uniaxial-ars-hg.html"
   },
   {
@@ -13,6 +14,7 @@
     "model": "146AE",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/GRAS/146AE.pdf",
     "userManual": "",
+    "description": "Le 146AE est un ensemble microphonique 1/2'' prépolarisé Champ Libre durci et IP67.\nEn termes de caractéristiques, ce microphone de mesure possède : \nUne bague lumineuse signale lorsque l'alimentation à courant constant (CCP) se fait correctement.\nIl résiste aux chocs et aux températures extrêmes.\nFiche Technique",
     "link": "https://www.alliantech.com/microphone-de-mesure/9502-kit-microphone-champ-libre-durci-etanche-146ae.html"
   },
   {
@@ -21,6 +23,7 @@
     "model": "46AE",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/GRAS/46AE.pdf",
     "userManual": "",
+    "description": "Le 46AE est un ensemble microphonique 1/2'' prépolarisé Champ Libre à usage général. \nCe microphone de mesure acoustique dispose d'une plage de fréquences allant de 3,15 Hz à 20 kHz, d'une plage dynamique allant de 17 dB à 133 dB et d'une sensibilité de 50 mV/Pa.\nFiche Technique",
     "link": "https://www.alliantech.com/microphone-de-mesure/9625-kit-microphone-ccp-champ-libre-46ae.html"
   },
   {
@@ -29,6 +32,7 @@
     "model": "48LA",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/GRAS/48LA.pdf",
     "userManual": "",
+    "description": "Le 48LA de GRAS est un micro de mesure de précision ultra fin dédié aux mesures aéroacoustiques.\nCes microphones UTP (pour “Ultra-Thin Precision”) sont les microphones à condensateur les plus fins du monde : seulement 1 mm d’épaisseur !\nIls sont tellement fins que ce sont les seuls micros capables d’effectuer des mesures dans la couche limite.\nSes dimensions sont : 16 x 8 x 1 mm.\nIl est facile à monter et à démonter.\nEn plus de leur faible coût, ce microphone de précision est garanti 2 ans.\nCette garantie couvre les défauts de matériaux et de fabrication pour :\nFiche Technique",
     "link": "https://www.alliantech.com/microphone-de-mesure/9647-microphone-utp-ultrafin-haute-pression-48la.html"
   },
   {
@@ -37,6 +41,7 @@
     "model": "48LX-1",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/GRAS/48LX-1.pdf",
     "userManual": "",
+    "description": "Le 48LX-1 est un microphone de mesure de précision ultra fin dédié aux mesures aéroacoustiques.\nCes microphones UTP (pour “Ultra-Thin Precision”) sont les microphones à condensateur les plus fins du monde : seulement 1 mm d’épaisseur !\nIls sont tellement fins que ce sont les seuls micros capables d’effectuer des mesures dans la couche limite.\nSes dimensions sont : 16 x 8 x 1 mm.\nIl est facile à monter et à démonter.\nEn plus de leur faible coût, ce microphone de précision est garanti 2 ans.\nCette garantie couvre les défauts de matériaux et de fabrication pour :\nFiche Technique",
     "link": "https://www.alliantech.com/microphone-de-mesure/9648-microphone-utp-ultrafin-haut-medium-48lx-1.html"
   },
   {
@@ -45,6 +50,7 @@
     "model": "50VI-1",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/GRAS/50VI-1.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_UserManual/GRAS/50VI-1.pdf",
+    "description": "La sonde intensimétrique vectorielle de type 50VI comprend trois paires de microphones type 40AI, trois paires de préamplificateurs GRAS 26AA de 1/4\", des entretoises de 25 mm et de 50 mm couvrant la plage de fréquences de 80 Hz à 6,3 kHz.\nLa poignée de la sonde a une entrée pour 6 préamplificateurs et une LED pour indiquer deux états ainsi qu’un bouton poussoir pour la télécommande.\nLa sortie télécommandé peut, par exemple, être connectée au port RS232 d’un ordinateur pour contrôler le processus d’acquisition de données.\n   Fiche Technique  \n   Manuel d'Utilisation  ",
     "link": "https://www.alliantech.com/sondes-intensimetriques/9658-sonde-intensimetrique-vectorielle-50vi1.html"
   },
   {
@@ -53,6 +59,7 @@
     "model": "Sonde droite",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/sondedroite.pdf",
     "userManual": "",
+    "description": "Les sondes droites sont principalement utilisées pour mesurer le débit proche de la zone de test. \nLeur géométrie permet à ce type de sondes Pitot et Multi-trous d'être montée de façon à être dans la ligne directe du flux d'air.\nLes installations d'essais en soufflerie utilisent souvent des sondes droites car leurs systèmes de montage sont perpendiculaires au flux d'air. Ainsi, la sonde droite place la tête de la sonde directement dans le flux d'air.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10040-sonde-droite-pitot-multi-trous.html"
   },
   {
@@ -61,6 +68,7 @@
     "model": "µADC Models",
     "datasheet": "https://www.alliantech.com//img/cms/products/aeroprobe/aeroprobe-micro-adc-specifications.pdf",
     "userManual": "",
+    "description": "Parmi nos centrales embarquées, le Micro Air Data Computer (μADC) est un élément essentiel d'une solution complète de mesure en vol pour les données aériennes avec une combinaison sans précédent de taille et de précision.\nAeroprobe propose cinq modèles de μADC adaptés à une grande variété d'applications.\nTous les modèles sont compatibles avec les sondes Air Data et Pitot-statique d’Aeroprobe.\nLes µADC ont obtenu des certifications de laboratoires indépendants qui démontrent leur capacité à fonctionner dans des conditions difficiles, y compris des environnements de températures et de vibrations extrêmes.\n6 Modèles : Atlas • Horizon • Defiant • Hyperion • Athena • Endurance (à découvrir plus en détails ci-dessous dans l'onglet Description)\n   Fiche Technique  \n",
     "link": "https://www.alliantech.com/centrales-embarquees/10042-ordinateur-donnees-vol-miniature-adc-air-data-computer.html"
   },
   {
@@ -69,6 +77,7 @@
     "model": "Sonde Air Data",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/SondeAirData.pdf",
     "userManual": "",
+    "description": "Conçue pour une intégration simple avec le Micro Air Data Computer (μADC), la sonde Air Data est une sonde multi-trous légère et efficace. \nCette solution est idéale là où la mobilité est essentielle car elle permet de mesurer :\nLes sondes Air Data permettent de calculer le vecteur d'écoulement complet.\nSa conception complète améliore les solutions de données aériennes traditionnelles en éliminant les mesures girouettes de tangage et de lacet, qui ont des pièces mobiles avec des effets d'inertie qui introduisent l'inexactitude et augmentent le poids et le temps de réponse.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10045-sonde-essais-vol-air-data.html"
   },
   {
@@ -77,6 +86,7 @@
     "model": "Sonde Cobra",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/SondeCobra.pdf",
     "userManual": "",
+    "description": "La sonde Cobra est une sonde multi-trous disponible en 3, 5 ou 7 trous.\nLa conception de cette sonde de mesure est idéale pour tester des environnements où le débit d’air change régulièrement.\nLa tête de la sonde Cobra reste alignée avec le corps afin de ne pas changer d'emplacement lorsqu'elle est tournée pour recevoir des mesures sous un angle différent.\nCette sonde multi trous est souvent utilisée dans les applications de test en soufflerie où les conditions de débit d'air sont modifiées intentionnellement et régulièrement.\nLa conception en Cobra permet d’économiser du temps de configuration en éliminant le besoin de remonter la sonde chaque fois qu’une nouvelle mesure est nécessaire.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10046-sonde-cobra.html"
   },
   {
@@ -85,6 +95,7 @@
     "model": "Sonde Custom",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/SondeCustom.pdf",
     "userManual": "",
+    "description": "Aeroprobe est spécialisé dans la fabrication de sondes sur mesure afin de répondre à tous vos besoins et de correspondre à toutes vos applications.\nLa personnalisation de vos sondes Pitot ou multi-trous peut inclure :\nContactez-nous dès aujourd'hui pour échanger autour de votre projet mesure et pour savoir ce qui est réalisable.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10047-sondes-personnalisees-custom.html"
   },
   {
@@ -93,6 +104,7 @@
     "model": "Sonde coudée",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/Sondecoud%C3%A9e.pdf",
     "userManual": "",
+    "description": "Les sondes coudées usinées sont des sondes multi trous idéales pour les environnements avec des espaces restreints, comme ceux entre les rangées de pales dans les turbomachines compactes.\nLes sondes coudées permettent le placement de l'instrumentation dans des endroits spécifiques et ciblés sans sacrifier la précision ou perturber les conditions d'écoulement (le moins intrusif possible).\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10048-sonde-coudee-usinee.html"
   },
   {
@@ -101,6 +113,7 @@
     "model": "Sonde excentrique",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/Sondeexcentrique.pdf",
     "userManual": "",
+    "description": "La sonde à virole excentrique est une sonde multi-trous coudée usinée construite avec un corps décentré.\nCette conception rapproche la tête de l'axe central du corps de la sonde, lui permettant de s'adapter dans des espaces plus petits et plus compacts.\nCette sonde est idéale pour les applications de turbomachines où l'espace entre les compartiments moteur est limité.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10049-sonde-virole-excentrique-haute-frequence.html"
   },
   {
@@ -109,6 +122,7 @@
     "model": "Sonde rapide",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/SondeRapide.pdf",
     "userManual": "",
+    "description": "Les sondes à cinq trous \"Fast Response\" sont des sondes multi trous qui permettent de mesurer les angles d'écoulement instables et les pressions totales & statiques.\nAeroprobe construit des sondes en acier inoxydable de haute qualité avec des capteurs de pression intégrés pour maximiser la réponse en fréquence.\nDes étalonnages minutieux des capteurs de pression de la sonde, de l'aérodynamique de la tête et de la réponse pneumatique sont tous effectués dans l'usine de fabrication aux Etats-Unis.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10050-sonde-reponse-rapide.html"
   },
   {
@@ -117,6 +131,7 @@
     "model": "Sonde Air Data chauffée",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/SondeAirDataChauff%C3%A9e.pdf",
     "userManual": "",
+    "description": "Les sondes Air Data chauffées sont conçues pour les systèmes habités et non habités nécessitant une résistance à la pluie et une capacité de dégivrage.\nCes sondes multi-trous peuvent être mises en œuvre dans une large gamme de conditions environnementales.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10052-sonde-essais-vol-chauffee.html"
   },
   {
@@ -125,6 +140,7 @@
     "model": "Sonde haute température",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/SondeHauteTemp%C3%A9rature.pdf",
     "userManual": "",
+    "description": "Les sondes haute température sont des sondes multi trous spécialement conçues pour les environnements à très haute température, tels que les turbines à gaz et à vapeur et les tests d'échappement.\nFabriquée en alliage de nickel à haute résistance, la sonde haute température est utilisable jusqu'à 900° C.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10053-sonde-haute-temperature.html"
   },
   {
@@ -133,6 +149,7 @@
     "model": "Sonde Kiel",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/SondeKiel.pdf",
     "userManual": "",
+    "description": "Les sondes de Kiel sont utilisées pour mesurer la pression totale avec une grande précision sur une large gamme d'angles d'écoulement.\nElle élimine les erreurs de mesure associées aux différents angles d'écoulement et ne nécessite pas d'étalonnage aérodynamique.\nDes sondes combinées Kiel - Température (TAT) sont également disponibles pour fournir des données de pression et de température avec un seul instrument.\nDe plus, Aeroprobe est un acteur reconnu dans la conception et l'ingénierie personnalisées des sondes Kiel pour l'intégration dans les géométries de peignes et montages spécifiques.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/anemometrie/10054-sonde-de-kiel.html"
   },
   {
@@ -141,6 +158,7 @@
     "model": "Sonde L",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/SondeL.pdf",
     "userManual": "",
+    "description": "La conception en forme de L sur les sondes multi-trous permet moins de blocage du flux d'air en aval car le corps de la sonde est monté perpendiculairement à sa tête, retirant le corps du flux d'air.\nLa sonde en forme de L est idéale pour les environnements de test en soufflerie car sa conception place la tête de la sonde directement dans le flux d'air tout en maintenant le support de la sonde sur le côté où il ne perturbera pas celui-ci.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10055-sonde-multi-trous-en-l.html"
   },
   {
@@ -149,6 +167,7 @@
     "model": "Omniprobe",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/OMNIPROBE.pdf",
     "userManual": "",
+    "description": "La sonde multitrous Omniprobe dotée de 12 trous est un choix de mesure idéal pour les écoulements avec des perturbations fortes, comme le sillage derrière les automobiles.\nUne tête sphérique micro-usinée avec 12 ports de pression qui permettent de mesurer +/- 150 degrés d'angle d'écoulement.\nLes Omniprobes sont idéales dans les applications où la direction prédominante du flux n'est pas connue à l'avance ou lorsque la sonde peut voir une inversion complète du flux pendant les tests, comme dans l'ingénierie éolienne ou les flux de tourbillon de la chambre de combustion.\nCes sondes sont beaucoup utilisées en soufflerie.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-multi-trous/10056-sonde-omniprobe-12-trous.html"
   },
   {
@@ -157,6 +176,7 @@
     "model": "Pitot statique",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/PitotStatique.pdf",
     "userManual": "",
+    "description": "Les sondes Pitot statiques mesurent les pressions totales et statiques. \nElles permettent de calculer la vitesse d'écoulement.\nLa sonde Pitot statique est le plus couramment utilisée dans les applications où seule une mesure de la vitesse de l'air est souhaitée.\nLes installations de soufflerie utilisent couramment ce type de sondes pour caractériser leurs souffleries car l'angle du flux d'air est connu.\nL'aviation et des systèmes sans pilote (drônes) utilisent également des sondes Pitot statiques pour mesurer la vitesse, le nombre de Mach et l'altitude de l'avion.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-pitot-et-cones/10057-sonde-pitot-statique.html"
   },
   {
@@ -165,6 +185,7 @@
     "model": "Peigne",
     "datasheet": "",
     "userManual": "",
+    "description": "Un peigne est une sonde ou un ensemble de sondes avec plusieurs têtes qui permet de prendre plusieurs mesures simultanément.\nCes sondes permettent d'économiser des ressources précieuses en réduisant les temps de configuration et de test.\nLes peignes sont conçus sur mesure pour chaque application, dans des géométries différentes, en faisant appel à une fabrication hybride combinant parfaitement les meilleures technologies de micro-usinage et d’impression 3D.\nIls peuvent incorporer des têtes de sondes multi trous, sondes de Kiel, sondes TAT (Total Air Temperature) ou des combinaisons de celles-ci.\nLes peignes sont idéaux pour gagner du temps et optimiser les coûts.\nÉtant donné que plusieurs mesures sont prises simultanément, il n'est pas nécessaire d'exécuter un test, de déplacer l'instrument et de réexécuter le test.",
     "link": "https://www.alliantech.com/sondes-multi-trous/10058-peigne-mesure-sondes-multi-trous-kiel-tat.html"
   },
   {
@@ -173,6 +194,7 @@
     "model": "Sonde TAT",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROPROBE/SondeTAT.pdf",
     "userManual": "",
+    "description": "Une sonde de température totale de l'air (TAT) a la même conception qu'une sonde de Kiel, mais comprend également un thermocouple ou RTD pour mesurer la température du flux d'air.\nUn étalonnage aérodynamique est effectué dans les souffleries d’Aeroprobe pour faire une mise en relation entre le facteur de récupération et le nombre de Mach du flux.\nCet étalonnage permet une mesure de la température réelle qui, autrement, serait faussée par les conditions de fonctionnement.\nDes combinaisons de sondes TAT et multi-trous sont également disponibles pour fournir des données de pression et de température avec un seul instrument.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/anemometrie/10059-sonde-tat-total-air-temperature.html"
   },
   {
@@ -181,6 +203,7 @@
     "model": "LSOC/LSOP",
     "datasheet": "https://www.alliantech.com//img/cms/Product_UserManual/SHERBORNE%20SENSORS/LSOC_LSOP-Inclinometer.pdf",
     "userManual": "",
+    "description": "Le LSO est un servo-inclinomètre de haute précision référencé par gravité utilisé dans une variété d'applications industrielles.\nCes inclinomètres sont disponibles dans une variété de plages angulaires, chacune avec des signaux de sortie à faible impédance.\nLes terminaisons électriques se font via un connecteur à verrouillage à baïonnette à 6 voies (LSOC) ou des broches à souder (LSOP).\nLe capteur d'inclinaison LSO est extrêmement robuste et résistera à des chocs supérieurs à 1500g.\nLa conception a fait ses preuves avec plusieurs milliers d'utilisation à travers le monde dans les applications les plus exigeantes.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/inclinometres/10076-inclinometre-asservi-lsoc-lsop.html"
   },
   {
@@ -189,6 +212,7 @@
     "model": "LSI",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/SHERBORNE SENSORS/LSI.pdf",
     "userManual": "",
+    "description": "La série LSI est une gamme d'inclinomètres servo référencés par gravité qui sont utilisés dans une variété d'applications industrielles où des mesures angulaires de haute précision sont nécessaires.\nLes modèles sont disponibles dans une variété de plages allant de ±14,5 à ±90 degrés avec des signaux de tension de sortie à faible impédance.\nLes terminaisons électriques se font via des broches à souder.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/inclinometres/10077-inclinometre-asservi-lsi.html"
   },
   {
@@ -197,6 +221,7 @@
     "model": "T233",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/SHERBORNE SENSORS/T233.pdf",
     "userManual": "",
+    "description": "La série T233/5 fait partie des inclinomètres asservis à double axes référencés par gravité.\nCes capteurs d'inclinaison sont utilisés dans une variété d'applications industrielles où des mesures angulaires de haute précision sont nécessaires, et dans des applications avec des niveaux élevés de vibrations et de chocs mécaniques jusqu'à 1500g.\nLes modèles sont disponibles dans une variété de plages allant de ±1 degré à ±90 degrés avec des signaux de tension de sortie à faible impédance et sont précisément configurés pour un fonctionnement à deux axes.\nLes terminaisons électriques se font via un connecteur sur le T233 ou des broches à souder sur la variante T235.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/inclinometres/10079-inclinometre-asservi-t233.html"
   },
   {
@@ -205,6 +230,7 @@
     "model": "T640",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/SHERBORNE SENSORS/T640.pdf",
     "userManual": "",
+    "description": "La série T640 est une gamme de capteurs d'inclinaison référencés par gravité utilisés dans une variété d'applications industrielles où des mesures angulaires de précision sont nécessaires dans des applications difficiles.\nCe type d'inclinomètres MEMS est disponible dans une variété de plages de ±30° à ±90° C avec des signaux de tension de sortie filtrés et non filtrés à faible impédance.\nLes terminaisons électriques se font via un connecteur 6 pins sur le T643 ou des broches à souder sur la variante T645.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/inclinometres/10085-inclinometre-mems-t640.html"
   },
   {
@@ -213,6 +239,7 @@
     "model": "AOA",
     "datasheet": "",
     "userManual": "",
+    "description": "La sonde de mesure d'angle d'attaque (AoA) fournit l'AoA ou le dérapage (SS) en détectant la direction du flux d'air local. \nLa sonde est continuellement entraînée à une différence de pression nulle entre les passages supérieur et inférieur de sa surface avant. \nCes fonctions détectent la direction du flux d'air (Local AoA ou SS). \nLa position angulaire de la sonde de détection est convertie en une sortie électrique par un capteur angulaire.",
     "link": "https://www.alliantech.com/sondes-pitot-et-cones/10282-sonde-mesure-angle-attaque-aoa.html"
   },
   {
@@ -221,6 +248,7 @@
     "model": "IMFP",
     "datasheet": "",
     "userManual": "",
+    "description": "La sonde multifonction intégrée fournit l'angle d'attaque (AoA), la pression totale (Pt) et la pression statique (Ps).\nElle fournit l'AoA en détectant la direction du flux d'air local (Local AoA).\nDes ports de détection ont été ajoutés pour la mesure d'impact et la pression statique sur la sonde du capteur rotatif qui sont utilisés pour calculer le Pitot / Statique, la vitesse, le nombre de Mach et l'altitude.\nLa sonde est continuellement entraînée à une différence de pression nulle entre les passages supérieur et inférieur de sa surface avant.\nLa position angulaire de la sonde de détection est convertie en une sortie électrique par un capteur angulaire.\nLa pression au niveau du trou central de la sonde est dirigée vers un capteur de pression (Pt) précis et stable.",
     "link": "https://www.alliantech.com/sondes-pitot-et-cones/10283-sonde-multifonction-integree-imfp.html"
   },
   {
@@ -229,6 +257,7 @@
     "model": "4207",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROSONIC/4207.pdf",
     "userManual": "",
+    "description": "Le modèle 4207 est une sonde Pitot avec configuration droite ou en L, à faible consommation en énergie et avec un diamètre de 7,9 mm.\nCe type de sonde est idéale pour des applications aéronautiques telles que les essais en vol.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-pitot-et-cones/10287-sonde-pitot-essais-en-vol-4207.html"
   },
   {
@@ -237,6 +266,7 @@
     "model": "100100",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/PDF%20blog/trainage_cone.pdf",
     "userManual": "",
+    "description": "Le traînage de cône est utilisé dans l'aéronautique, durant le processus de fabrication des avions, lors des premières semaines d'essais en vol.\nLe cône de trainée permet d'étalonner l'erreur de pression statique (indication d'altitude) du système statique Pitot d'un aéronef.\nPour ce faire, il fournit une mesure précise de la pression atmosphérique ambiante (pression statique) bien à l'écart du fuselage de l'avion.\nLe système de trainage de cône est placé derrière l'avion a minima à une longueur de fuselage par le biais d'un tube de pression à haute résistance.\nLa pression statique est mesurée à l'avant du cône par plusieurs orifices statiques.\nLe cône stabilise et aligne les orifices par rapport aux flux d'air entrants.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/sondes-pitot-et-cones/10288-cone-trainee-essais-vol-100100.html"
   },
   {
@@ -245,6 +275,7 @@
     "model": "100900",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROSONIC/100900.pdf",
     "userManual": "",
+    "description": "Perchette avec 4 girouettes et 1 capteur TAT (Total Air Temperature).\nApplication aéronautique pour les essais en vol. \n   Fiche Technique  ",
     "link": "https://www.alliantech.com/perchettes/10290-perchette-4-girouettes-essais-en-vol-100900.html"
   },
   {
@@ -253,6 +284,7 @@
     "model": "100510",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/AEROSONIC/100510.pdf",
     "userManual": "",
+    "description": "Perchette miniature avec tête inclinable, non chauffée.\nApplications aéronautique pour les essais en vol. \n   Fiche Technique  ",
     "link": "https://www.alliantech.com/perchettes/10295-perchette-miniature-tete-inclinable-100510.html"
   },
   {
@@ -261,6 +293,7 @@
     "model": "Kelson One/One+",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/PDF%20blog/KELSON%20ONE.pdf",
     "userManual": "",
+    "description": "Le Kelson One /One+ est un afficheur pédagogique avec pictogramme oreille tricolore permettant de sensibiliser efficacement les personnes évoluant dans un milieu bruyant au port des EPI. Il possède deux seuils préprogrammés et réglables sont surveillés, dès que le premier seuil est atteint l’oreille lumineuse passe du vert à l’orange et de l’orange au rouge si le second seuil est dépassé. Il Permet de visualiser facilement le niveau sonore instantané ou moyen auquel vous êtes exposé, C'est un excellent outil de sensibilisation et d'information sur les niveaux sonores ambiants.\n\n                            \n                                \n                                    \n                                    Fiche Technique\n                                \n                            \n                        ",
     "link": "https://www.alliantech.com/afficheurs/13499-afficheur-pedagogique.html"
   },
   {
@@ -269,6 +302,7 @@
     "model": "Kelson Pro",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/PDF%20blog/KELSON%20PRO.pdf",
     "userManual": "",
+    "description": "Le Kelson Pro est un afficheur pédagogique avec pictogramme oreille tricolore permettant de sensibiliser efficacement les personnes évoluant dans un milieu bruyant au port des EPI Il mesure, par bandes d’octave (option). Il permet de visualiser facilement le niveau sonore instantané ou moyen auquel vous êtes exposé, Il embarque un serveur web qui permet le paramétrage et la récupération de l’historique.\n\n                            \n                                \n                                    \n                                    Fiche Technique\n                                \n                            \n                        ",
     "link": "https://www.alliantech.com/afficheurs/13500-afficheur-enregistreur-pedagogique-connecte.html"
   },
   {
@@ -277,6 +311,7 @@
     "model": "Kelson L",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/PDF%20blog/KELSON%20L.pdf",
     "userManual": "",
+    "description": "Le Kelson L (maître) est un grand afficheur/enregistreur pédagogique avec pictogramme oreille tricolore (510 X 510) permettant de sensibiliser efficacement les personnes évoluant dans un milieu bruyant au port des EPI.\n\n                            \n                                \n                                    \n                                    Fiche Technique\n                                \n                            \n                        ",
     "link": "https://www.alliantech.com/afficheurs/13501-grand-afficheur-enregistreur-pedagogique.html"
   },
   {
@@ -285,6 +320,7 @@
     "model": "Sensibel One/One+",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/PDF%20blog/SENSIBEL%20ONE.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_DataSheet/PREVENTEC/Sensibel%20One.pdf",
+    "description": "Le Sensibel One/One+ conforme au décret 98-1143 et à la norme NF S31-122-1-2017 est un afficheur enregistreur numérique, il permet de sensibiliser efficacement les personnes évoluant dans un milieu bruyant au port des EPI. Très efficace également dans un souci de préservation d’un certain confort acoustique. Le Sensibel One/One+ affiche et enregistre (One+) un Lpc, un dB(A), dB(C), instantané ou moyen (durée d’intégration réglable). C'est un excellent outil d'information sur les niveaux sonores ambiants et de sensibilisation au port des EPI en cas de niveaux sonores particulièrement élevés. Il est également apprécié dans les lieux ou un certain confort acoustique est recherché.\n   Fiche Technique Sensibel One  \n   Fiche Technique Sensibel One+  ",
     "link": "https://www.alliantech.com/afficheurs/13502-afficheur-enregistreur-numerique.html"
   },
   {
@@ -293,6 +329,7 @@
     "model": "Sensibel Pro",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/PDF%20blog/SENSIBEL%20PRO.pdf",
     "userManual": "",
+    "description": "Le Sensibel Pro est un afficheur enregistreur numérique, il permet de sensibiliser efficacement les personnes évoluant dans un milieu bruyant au port des EPI. Très efficace également dans un souci de préservation d’un certain confort acoustique. Il affiche clairement le niveau sonore instantané ou moyen (durée d’intégration réglable) en dB(A) ou en dB(C), la tendance d’évolution (indique si le niveau moyen a tendance à monter ou à descendre) et enregistre continuellement les niveaux sonores en Un serveur web embarqué permet une surveillance en temps réel. Fonctionnement en réseau possible. Option : Envoi des messages d’alertes par email suivant un scénario préétabli ou connexion 4G.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/afficheurs/13503-afficheur-enregistreur-numerique.html"
   },
   {
@@ -301,6 +338,7 @@
     "model": "Sensibel Pro+",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/PDF%20blog/SENSIBEL%20PRO%20+.pdf",
     "userManual": "",
+    "description": "Le Sensibel Pro+ conforme au décret 2017-1244 du 7 août 2017 et à la norme NF S31-122-1 est un triple afficheur/enregistreur numérique, il permet de sensibiliser efficacement les personnes évoluant dans un milieu bruyant au port des EPI avec envois d’alertes mail ou sms (option). Affiche, enregistre, le niveau sonore Lpc, instantané ou moyen (durée d’intégration réglable) en dB(A), dB(C), et bandes d’octave (option). Affiche la tendance d’évolution (indique si le niveau moyen a tendance à monter ou à descendre). Triple afficheur: 1 principal, 2 secondaires (ces 3 afficheurs sont permutables et totalement programmables) Un serveur web embarqué permet de le paramétrer, de récupérer l’historique, de suivre en temps réel, seconde par seconde, l’évolution des niveaux en global et par bandes d’octave (option).\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/afficheurs/13505-triple-afficheur-enregistreur-numerique-connecte.html"
   },
   {
@@ -309,6 +347,7 @@
     "model": "IT681X",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/METRIX/IT6810.pdf",
     "userManual": "",
+    "description": "La série de transmetteur d'impact IT681X est  muni de conditionneur de signal intégré. Ils mesurent le relachement mécanique avec la commodité de la technologie de capteur à boucle 4-20 mA et un connecteur de style MIL-C-5015 à 2 broches.\nIls ont un élément de détection de cristal piézoélectrique intégré et utilise une fonction de temporisation dans le cadre de sa détermination de gravité. Un compteur d'événements d'impact et un dispositif de mémoire sont utilisés pour enregistrer des événements atteignant un niveau de seuil d'amplitude prédéterminé.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/transmetteur-de-vibration/13636-transmetteur-d-impact-it681x.html"
   },
   {
@@ -317,6 +356,7 @@
     "model": "FE320",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/KAPPA/500-85148_n_01_ds_flight_eye_320_en.pdf",
     "userManual": "",
+    "description": "Flight Eye 320 est un modèle de caméra aéronautique qui est utilisée dans les tests d'essai en vol (FTI) pour aéronefs à voilure fixe et tournante, enregistrement de crash pour aéronefs légers et hélicoptères, drones, VTOL / taxi aérien, formation, débriefing et enregistrement ; surveillance pour cockpit et cabine.\nFiche Technique",
     "link": "https://www.alliantech.com/camera-aeronautique/13638-flight-eye-fe-320.html"
   },
   {
@@ -325,6 +365,7 @@
     "model": "FE350",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/KAPPA/500-30651_i_01_ds_flight_eye_350_en.pdf",
     "userManual": "",
+    "description": "Flight Eye 350 est un modèle de caméra aéronautique qui est utilisée dans les tests d'essai en vol (FTI) pour aéronefs à voilure fixe et tournante, enregistrement de crash pour aéronefs légers et hélicoptères, drones, VTOL / taxi aérien, formation, débriefing et enregistrement ; surveillance pour cockpit et cabine.\nVidéo haute définition avec différentes focales.\nVue panoramique de 17° à 95° FOV.\nProtection totale contre le givrage, la buée et la foudre.\nBoîtier IP 67 pour montage sur cardan et interface Ethernet.\nFiche Technique",
     "link": "https://www.alliantech.com/camera-aeronautique/13640-flight-eye-fe-320.html"
   },
   {
@@ -333,6 +374,7 @@
     "model": "FE250",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/KAPPA/500-53990_e_01_ds_flight_eye_250_en.pdf",
     "userManual": "",
+    "description": "Flight Eye 250 est ue caméra aéronautique qui est utilisée dans les tests d'essai en vol (FTI) pour aéronefs à voilure fixe et tournante, enregistrement de crash pour aéronefs légers et hélicoptères, drones, VTOL / taxi aérien, formation, débriefing et enregistrement ; surveillance pour cockpit et cabine.\nVidéo haute définition avec différentes focales.\nVue panoramique de 17° à 95° FOV.\nProtection totale contre le givrage, la buée et la foudre.\nBoîtier IP 67.\nFiche Technique",
     "link": "https://www.alliantech.com/camera-aeronautique/13641-flight-eye-fe-320.html"
   },
   {
@@ -341,6 +383,7 @@
     "model": "RIB4D",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/KAPPA/200309_faltblatt_a4_rib_4d_web2.pdf",
     "userManual": "",
+    "description": "Le RIB4D est une caméra système de défense haute performance pour l'inspection des canons d'armes de gros calibre, faisant appel aux technologies du scanner laser.\nElle est conçue pour les troupes souhaitant évaluer l'état réel de l'intérieur du canon après le tir pouvant ainsi calculer sa durée de vie restante.\nDans la tête de mesure du RIB 4D, un balayage laser supersensible génère un nuage de points riche en détails.\nDe plus, 8 capteurs CMOS complètent l'inspection visuelle avec des vidéos à 360° des surfaces intérieures du canon.\nLa numérisation très précise alimente une base de données complète pour une évaluation sécurisée de l'état intérieur d'un canon.\nLa caméra RIB 4D est conçue pour les canons lisses et rayés.\nGrâce à des bagues adaptatrices, elle s'adapte facilement à différents calibres de 76 à 155 mm. \nFiche Technique",
     "link": "https://www.alliantech.com/camera-systeme-de-defense/13642-rib-4d-camera-systeme-defense.html"
   },
   {
@@ -349,6 +392,7 @@
     "model": "KS943B.100",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/MMF/KS943B.pdf",
     "userManual": "",
+    "description": "Accéléromètre triaxial IEPE\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/accelerometre-piezoelectrique/13648-accelerometre-triaxial.html"
   },
   {
@@ -357,6 +401,7 @@
     "model": "AI-Q-710",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/INNALABS/AI-Q-710.pdf",
     "userManual": "",
+    "description": "Les accéléromètres de mesure InnaLabs AI-Q-710 offrent un boîtier compact et durci pour fournir une résistance aux vibrations et aux chocs extrêmement élevée. \n   Fiche Technique  ",
     "link": "https://www.alliantech.com/accelerometre-mems/13678-accelerometres-de-controle.html"
   },
   {
@@ -365,6 +410,7 @@
     "model": "AI-Q-2010",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/INNALABS/AI-Q-2010.pdf",
     "userManual": "",
+    "description": "Les accéléromètres de qualité pour la navigation InnaLabs AI-Q-2010 se concentrent sur une fiabilité constante combinée à une stabilité à long terme, ce qui en fait la solution optimale pour les applications de navigation de haute qualité et cette position reste largement incontestée à ce jour.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/accelerometre-mems/13679-accelerometres-de-controle.html"
   },
   {
@@ -373,6 +419,7 @@
     "model": "CVG-HT",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/INNALABS/CVG-HT.pdf",
     "userManual": "",
+    "description": "Le CVG-HT est un gyroscope de haute performance, miniature, robuste et très fiable. \nConçu pour fournir une mesure inertielle de la vitesse angulaire des rotations autour d'un axe de référence, le CVG-HT est un capteur inertiel leader sur le marché pour les applications de forage, y compris les systèmes gyroscopiques de recherche Nord.\nGrâce à sa plage de température de fonctionnement de 185°C et à son très faible paramètre de marche aléatoire angulaire, le CVG-HT est inégalé par tout autre produit disponible sur le marché.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/gyroscopes/13684-gyroscope-miniature-cvg-ht.html"
   },
   {
@@ -381,6 +428,7 @@
     "model": "6251-4220",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/Product_DataSheet/lord_microstrain/3dm-gx5-gnss-ins.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_UserManual/lord_microstrain/3dm-gx5-45.pdf",
+    "description": "La 3DM-GX5-GNSS-INS (ex 3DM-GX5-45) est une centrale inertielle GPS, miniature et de haute performance.\nCette solution de navigation tout-en-un comprend un récepteur GNSS multi-constellations de haute précision utilisant les satellites GPS, GLONASS, BeiDou et Galileo.\nLes capteurs internes sont entièrement calibrés et compensés en température.\nLes performances hautement linéaires des capteurs et l'algorithme de filtre d'estimation auto-adaptatif produisent des sorties calculées très précises dans des conditions dynamiques.\nCette gamme de centrales inertielles avec GPS (INS) permet d'obtenir ce type de données calculées : position, vitesse, cap, inclinaison, pitch et roll, vitesse angulaire et accélération.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n   Manuel d'Utilisation  \n\n              ",
     "link": "https://www.alliantech.com/inertielles-avec-gps/13697-centrale-inertielle-gps-gnss.html"
   },
   {
@@ -389,6 +437,7 @@
     "model": "6254-4220",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/lord_microstrain/3dm-gx5-ar.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_UserManual/lord_microstrain/3dm-gx5-15.pdf",
+    "description": "La 3DM-GX5-AR (ex 3DM-GX5-15) est une centrale inertielle VRU (Vertical Reference Unit) et IMU (Inertial Measurement Unit) de haute performance dotée de dimensions miniatures.\nElle dispose d’un accéléromètre triaxial, d'un gyroscope et de capteurs de température entièrement calibrés et compensés en température.\nCette combinaison de facteurs permet d'obtenir des mesures précises dans les applications dynamiques et dans toutes les conditions.\nCette gamme de centrales inertielles VRU / IMU permet d'obtenir ces données calculées : inclinaison, roulis, tangage, lacet, vitesse angulaire et accélération.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n   Manuel d'Utilisation  \n\n              ",
     "link": "https://www.alliantech.com/imu/13699-centrale-inertielle-imu.html"
   },
   {
@@ -397,6 +446,7 @@
     "model": "6255-4250",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/Product_DataSheet/lord_microstrain/3dm-gx5-imu.pdf",
     "userManual": "https://www.alliantech.com/https://www.alliantech.com/img/cms/Product_UserManual/lord_microstrain/3dm-gx5-10_user_manual_8500-0062_0.pdf",
+    "description": "La 3DM-GX5-IMU (ex 3DM-GX5-10) est une centrale inertielle IMU (Inertial Measurement Unit) avec des dimensions miniatures.\nElle dispose d’un accéléromètre triaxial, gyroscope et capteurs de température.\nCette combinaison de facteurs permet d'obtenir des mesures précises dans les applications dynamiques et dans toutes les conditions.\nCette gamme de de centrales inertielles IMU ne dispose pas de filtre de Kalman et ne permet pas de ressortir de données calculées contrairement à la gamme de centrales inertielles VRU / IMU.\nOn obtient donc les sorties brutes accélération et vitesse angulaire.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n   Manuel d'Utilisation  \n\n              ",
     "link": "https://www.alliantech.com/imu/13702-centrale-inertielle-gps-gnss.html"
   },
   {
@@ -405,6 +455,7 @@
     "model": "6252-4220",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/lord_microstrain/3dm-gx5-gnss-ahrs.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_UserManual/lord_microstrain/3dm-gx5-35.pdf",
+    "description": "La 3DM-GX5-GNSS-AHRS (ex 3DM-GX5-35) est une centrale inertielle AHRS miniature de haute précision dotée d'une fonction GPS.\nCette solution de navigation inertielle tout-en-un dispose d'un récepteur GNSS multi-constellations intégré de haute performance utilisant les données des satellites GPS, GLONASS, BeiDou et Galileo .\nElle dispose d’un accéléromètre triaxial, d’un gyroscope et d’un magnétomètre entièrement calibrés et compensés en température.\nLes processeurs embarqués exécutent un filtre de Kalman étendu auto-adaptatif exclusif (EKF) pour des estimations dynamiques exceptionnelles de l’attitude, ce qui rend cette centrale idéale pour un large éventail d’applications.\nCette gamme de centrales inertielles AHRS avec GPS permet d'obtenir ce type de données calculées : cap, inclinaison, pitch et roll, vitesse angulaire et accélération.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n   Manuel d'Utilisation  \n\n              ",
     "link": "https://www.alliantech.com/attitude/13703-centrale-inertielle-ahrs.html"
   },
   {
@@ -413,6 +464,7 @@
     "model": "6275-4210",
     "datasheet": "https://www.alliantech.com/https://www.alliantech.com/img/cms/Product_DataSheet/lord_microstrain/3dm-cx5-imu.pdf",
     "userManual": "https://www.alliantech.com/https://www.alliantech.com/img/cms/Product_UserManual/lord_microstrain/3dm-cx5-10_user_manual.pdf",
+    "description": "Le modèle 3DM-CX5-IMU (ex 3DM-CX5-10) est la plus petite et la plus légère des centrales inertielles IMU (Unité de Mesure Inertielle) industrielles disponibles.\nIl est doté d'un accéléromètre et d'un gyroscope triaxiaux entièrement calibrés et compensés en température pour obtenir la combinaison optimale de qualités de mesure dans toutes les conditions dynamiques.\nCompact et léger, le 3DM-CX5-IMU convient parfaitement à un large éventail d'applications, notamment la stabilisation de plateformes, l'équilibrage de robots, le pointage d'antennes et la surveillance de l'utilisation.\nLa gamme de produits CX possède toutes les mêmes caractéristiques que la série GX dans un boîtier rentable, adapté aux intégrateurs de systèmes et conçu pour la production en série.\n   Fiche Technique  \n   Manuel d'Utilisation  \n\n              ",
     "link": "https://www.alliantech.com/imu/16696-centrale-inertielle-oem-imu.html"
   },
   {
@@ -421,6 +473,7 @@
     "model": "A64C",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/DTS/DTS-Datasheet-A64C-Accelerometer-2021-04.pdf",
     "userManual": "",
+    "description": "L'A64C est le tout dernier capteur de DTS, un accéléromètre linéaire dans un boîtier robuste, conforme aux normes industrielles. L'A64C supporte une large gamme de tensions d'excitation et fournit des sorties de haut niveau avec un faible niveau de bruit et de dérive. L'A64C s'adapte aux blocs de montage ATD existants et est idéal pour une variété d'environnements de test, y compris la biomécanique, les essais de vibrations et de chocs, les crash tests.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/accelerometre-piezoresistif/16697-accelerometre-lineaire.html"
   },
   {
@@ -429,6 +482,7 @@
     "model": "6274-4260",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/lord_microstrain/3dm-cx5-ar.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_UserManual/lord_microstrain/3dm-cx5-15.pdf",
+    "description": "Le modèle 3DM-CX5-AR (ex 3DM-CX5-15) est la plus petite et la plus légère des centrales inertielles IMU (Inertial Measurement Unit) / VRU (Vertical Reference Unit) industrielles disponibles pour mesurer l'attitude.\nIl est doté d'un accéléromètre et d'un gyroscope triaxiaux entièrement calibrés et compensés en température pour obtenir la combinaison optimale de qualités de mesure dans toutes les conditions dynamiques.\nCompact et léger, le 3DM-CX5-AR convient parfaitement à un large éventail d'applications, notamment la stabilisation de plateformes, l'équilibrage de robots, le pointage d'antennes et la surveillance de l'utilisation.\nLa gamme de produits CX possède toutes les mêmes caractéristiques que la série GX dans un boîtier rentable, adapté aux intégrateurs de systèmes et conçu pour la production en série.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n   Manuel d'Utilisation  \n\n              ",
     "link": "https://www.alliantech.com/imu/16698-centrale-inertielle-oem-imu.html"
   },
   {
@@ -437,6 +491,7 @@
     "model": "6273-4260",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/lord_microstrain/3dm-cx5-ahrs.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_UserManual/lord_microstrain/3dm-cx5-25.pdf",
+    "description": "Le 3DM-CX5-AHRS (ex 3DM-CX5-25) est une centrale inertielle AHRS de précision équivalente à la 3DM-GX5-25 dans un package OEM.\nElle dispose d’un accéléromètre triaxial, d’un gyroscope et d’un magnétomètre entièrement calibrés et compensés en température.\nLes processeurs embarqués exécutent un filtre de Kalman étendu auto-adaptatif exclusif (EKF) pour des estimations dynamiques exceptionnelles de l’attitude, ce qui rend cette centrale idéale pour un large éventail d’applications.\nCette gamme de centrales inertielles AHRS permet d'obtenir des données calculées comme le cap, l'inclinaison, pitch et roll, la vitesse angulaire et l'accélération.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n   Manuel d'Utilisation  \n\n              ",
     "link": "https://www.alliantech.com/attitude/16699-centrale-inertielle-oem-ahrs.html"
   },
   {
@@ -445,6 +500,7 @@
     "model": "6271-4260",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/lord_microstrain/3dm-cx5-gnss-ins.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_UserManual/lord_microstrain/3dm-cx5-45.pdf",
+    "description": "La centrale 3DM-CX5-GNSS/INS (ex 3DM-CX5-45) est une solution de navigation tout-en-un comprenant un récepteur GNSS multi-constellations de hautes performances utilisant les satellites GPS, GLONASS, BeiDou et Galileo, dans un package OEM.\nLes capteurs internes sont entièrement calibrés et compensés en température.\nLes performances hautement linéaires des capteurs et l'algorithme de filtre d'estimation auto-adaptatif produisent des sorties calculées très précises dans des conditions dynamiques.\nCette gamme de centrales inertielles avec GPS (INS) permet d'obtenir des données calculées comme la position, la vitesse, le cap, l'inclinaison, pitch et roll, la vitesse angulaire et l'accélération.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n   Manuel d'Utilisation  \n\n              ",
     "link": "https://www.alliantech.com/inertielles-avec-gps/16701-centrale-inertielle-gps-oem.html"
   },
   {
@@ -453,6 +509,7 @@
     "model": "AI-Q-2020",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/INNALABS/AI-Q-2020.pdf",
     "userManual": "",
+    "description": "Les accéléromètres de qualité pour la navigation InnaLabs AI-Q-2020 se concentrent sur une fiabilité constante combinée à une stabilité à long terme, ce qui en fait la solution optimale pour les applications de navigation de haute qualité et cette position reste largement incontestée à ce jour.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/accelerometre-mems/16708-accelerometres-de-controle.html"
   },
   {
@@ -461,6 +518,7 @@
     "model": "AI-Q-2030",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/INNALABS/AI-Q-2030.pdf",
     "userManual": "",
+    "description": "Les accéléromètres de qualité pour la navigation InnaLabs AI-Q-2030 se concentrent sur une fiabilité constante combinée à une stabilité à long terme, ce qui en fait la solution optimale pour les applications de navigation de haute qualité et cette position reste largement incontestée à ce jour.\n   Fiche Technique  ",
     "link": "https://www.alliantech.com/accelerometre-mems/16709-accelerometres-de-controle.html"
   },
   {
@@ -469,6 +527,7 @@
     "model": "AS2100",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/ACUITY/AS2100-datasheet.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_UserManual/ACUITY/AS2100-Manual-v1-0-0-2.pdf",
+    "description": "Le modèle AS2100 est un capteur de distance laser à très haute précision de mesure.\nIl est conçu pour fonctionner en extérieur, en pleine lumière, et même sur des cibles difficiles telles que sur des surfaces chaudes ou sombres.\nCe capteur laser est parfait pour une large gamme d'applications en raison de sa possibilité de prendre des mesures précises (± 1 mm) à des distances allant jusqu'à 500 mètres, et une fréquence de mesure allant jusqu'à 250 Hz.\n   Fiche Technique  \n   Manuel d'Utilisation  ",
     "link": "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html"
   },
   {
@@ -477,6 +536,7 @@
     "model": "6257-4260",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/lord_microstrain/3dm-cv5-ahrs.pdf",
     "userManual": "",
+    "description": "Le capteur 3DM-CV5-AHRS est la plus petite et la plus légère des centrales inertielles AHRS (Attitude and Heading Reference System) de type industriel avec filtre de Kalman adaptatif disponible. \nIl est doté d'un accéléromètre, d'un gyroscope et d'un magnétomètre triaxiaux entièrement calibrés et compensés en température afin d'obtenir la combinaison optimale de qualités de mesure dans toutes les conditions dynamiques.\nEn outre, les deux processeurs embarqués exécutent un filtre de Kalman étendu auto-adaptatif exclusif (EKF) pour des estimations d'attitude dynamique exceptionnelles, ce qui en fait un outil idéal pour un large éventail d'applications, notamment la stabilisation de plate-forme, les pilotes automatiques, la robotique et la surveillance de la santé et de l'utilisation des véhicules.\nLe 3DMCV5-AHRS est un capteur AHRS axé sur la valeur, conçu pour équilibrer le coût et la performance.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n\n              ",
     "link": "https://www.alliantech.com/attitude/16865-centrale-inertielle-gps-oem.html"
   },
   {
@@ -485,6 +545,7 @@
     "model": "6258-4260",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/lord_microstrain/3dm-cv5-ar.pdf",
     "userManual": "",
+    "description": "La 3DM-CV5-AR est la centrale inertielle OEM VRU (Unité de Référence Verticale) / IMU (Unité de Mesure Inertielle) parmi les plus petites et les plus légères du marché.\nCette centrale inertielle est dotée d'un accéléromètre et d'un gyroscope triaxiaux entièrement étalonnés et compensés en température pour obtenir la combinaison optimale de qualités de mesure dans toutes les conditions dynamiques.\nLa 3DM-CV5-AR est conçue pour équilibrer le coût et les performances. Il convient parfaitement à un large éventail d'applications, notamment la stabilisation de plates-formes, l'équilibrage de robots, le pointage d'antennes et la surveillance de l'utilisation.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n\n              ",
     "link": "https://www.alliantech.com/imu/16866-centrale-inertielle-gps-oem.html"
   },
   {
@@ -493,6 +554,7 @@
     "model": "6259-4210",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/lord_microstrain/3dm-cv5-imu.pdf",
     "userManual": "",
+    "description": "La centrale inertielle 3DM-CV5-IMU est une IMU industrielle qui est réputée pour être la plus petite et la plus légère du marché.\nElle est dotée d'un accéléromètre et d'un gyroscope triaxiaux entièrement calibrés et compensés en température pour obtenir une combinaison optimale de qualités de mesure dans toutes les conditions dynamiques.\nAxée sur la valeur, cette Unité de Mesure Inertielle est conçue pour équilibrer le coût et les performances. \nElle convient parfaitement à une large gamme d'applications, notamment la stabilisation de plates-formes, l'équilibrage de robots, le pointage d'antennes et la surveillance de l'utilisation.\nCode ECCN : 7A994 (soumis à End-user)\n   Fiche Technique  \n\n              ",
     "link": "https://www.alliantech.com/imu/16867-centrale-inertielle-gps-oem.html"
   },
   {
@@ -501,6 +563,7 @@
     "model": "41AC-3",
     "datasheet": "https://www.alliantech.com//img/cms/Product_DataSheet/GRAS/GRAS_41AC-3.pdf",
     "userManual": "https://www.alliantech.com//img/cms/Product_UserManual/GRAS/41AC-3.pdf",
+    "description": "Le 41AC-3 est un petit microphone de mesure d'extérieur de précision conforme à la norme CEI 61672-1 pour la surveillance du bruit ambiant et du bruit des avions en vol.\nAvec une protection contre les intempéries et sa fabrication en acier inoxydable de haute qualité, le 41AC-3 est idéal pour la surveillance à long terme du bruit ambiant et du bruit des avions.\nIl peut facilement être configuré pour mesurer le bruit avec une incidence de 90 degrés, typiquement le bruit de la communauté, ou - avec les données de correction appropriées - pour mesurer le bruit avec une incidence de 0 degré, typiquement les avions en vol. Une clé USB contenant les données de correction 1/12 d'octave nécessaires est délivrée avec la solution.\nUpgrade : mise à niveau du 41AC-3 avec la nouvelle fonction SysCheck2.\nLa fonctionnalité Syscheck est idéale pour les systèmes avec des microphones extérieurs placés sur le terrain. Elle permet au contrôle du système de vérifier à distance les performances de chaque unité de microphone.\nSyscheck2 offre une précision de mesure bien supérieure à celle de toutes les autres solutions disponibles dans le commerce et permet également de recueillir des données sur les paramètres environnementaux à proximité du capteur. \nFiche Technique\nManuel d'utilisation",
     "link": "https://www.alliantech.com/microphone-de-mesure/16869-microphone-d-exterieur-avec-fonctionnalite-syscheck2.html"
   }
 ]
