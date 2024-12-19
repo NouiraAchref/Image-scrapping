@@ -5,36 +5,13 @@ import fs from "fs/promises";
 import path from "path";
 import { removeBackground } from "@imgly/background-removal-node";
 import { fileURLToPath } from "url";
-import https from "https";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const NAVIGATION_TIMEOUT = 60000; // Set navigation timeout to 60 seconds
 const RETRY_LIMIT = 3; // Set retry limit for page navigation
-const downloadPDF = async (url, destination) => {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (response) => {
-        if (response.statusCode === 200) {
-          const chunks = [];
-          response.on("data", (chunk) => chunks.push(chunk));
-          response.on("end", async () => {
-            try {
-              const buffer = Buffer.concat(chunks);
-              await fs.writeFile(destination, buffer);
-              resolve();
-            } catch (error) {
-              reject(error);
-            }
-          });
-        } else {
-          reject(new Error(`Failed to download PDF: ${response.statusCode}`));
-        }
-      })
-      .on("error", (err) => reject(err));
-  });
-};
+
 // Function to get URLs from the sitemap
 async function getSitemapUrls(sitemapUrl) {
   try {
@@ -221,7 +198,7 @@ async function extractImagesFromPage(page, url, retryLimit = RETRY_LIMIT) {
         try {
           const breadcrumbText = document.querySelectorAll(
             ".breadcrumb.hidden-sm-down>ol>li>a>span"
-          )[2]?.textContent;
+          )[1]?.textContent;
           if (breadcrumbText !== "Capteurs") {
             return {
               images: [],
@@ -272,7 +249,9 @@ async function extractImagesFromPage(page, url, retryLimit = RETRY_LIMIT) {
             : "";
 
           const images = Array.from(
-            document.querySelectorAll(".col-md-6 .thumb-container img")
+            document.querySelectorAll(
+              ".col-md-6 .thumb-container img, .product-cover img"
+            )
           ).map((img) => img.src);
 
           return {
@@ -343,12 +322,12 @@ async function getProductModal(page) {
 }
 
 // Example usage
-const url = "https://example.com/product-page";
-const browser = await puppeteer.launch({ headless: true });
-const page = await browser.newPage();
+// const url = "https://example.com/product-page";
+// const browser = await puppeteer.launch({ headless: true });
+// const page = await browser.newPage();
 
-const model = await getProductModal(page, url);
-console.log("Product Modal (processed):", model);
+// const model = await getProductModal(page, url);
+// console.log("Product Modal (processed):", model);
 
 async function getLinksFromFile(filePath) {
   try {
@@ -374,16 +353,16 @@ async function main() {
 
   await fs.mkdir(imagesDir, { recursive: true });
 
-  // const urls = await getSitemapUrls(sitemapUrl);
-  const urls = await getLinksFromFile("./b.txt");
+  const urls = await getSitemapUrls(sitemapUrl);
+  //   const urls = await getLinksFromFile("./b.txt");
   if (urls.length === 0) return;
   console.log(urls.length);
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   try {
-    // const url =
-    //   "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html";
+    const url =
+      "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html";
     // const imageUrls = await extractImagesFromPage(page, url);
     // const model = await getProductModal(page, url);
     // await Promise.all(
@@ -394,13 +373,14 @@ async function main() {
 
     for (const [index, url] of urls.entries()) {
       console.log(`Processing ${index + 1} of ${urls.length}`);
-      const imageUrls = await extractImagesFromPage(page, url);
-      // const model = await getProductModal(page, url);
-      // await Promise.all(
-      //   imageUrls.map((imageUrl, imgIndex) =>
-      //     saveImage(imageUrl, imagesDir, imgIndex, model)
-      //   )
-      // );
+      await extractImagesFromPage(page, url);
+    //   const imageUrls = await extractImagesFromPage(page, url);
+    //   const model = await getProductModal(page, url);
+    //   await Promise.all(
+    //     imageUrls.map((imageUrl, imgIndex) =>
+    //       saveImage(imageUrl, imagesDir, imgIndex, model)
+    //     )
+    //   );
     }
   } catch (error) {
     console.error("Error during processing:", error);
