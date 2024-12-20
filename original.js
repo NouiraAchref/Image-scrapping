@@ -344,6 +344,7 @@ async function getLinksFromFile(filePath) {
     return links;
   } catch (error) {
     console.error("Error reading or parsing file:", error);
+    
   }
 }
 // Main function to process the sitemap and images
