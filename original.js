@@ -11,7 +11,30 @@ const __dirname = path.dirname(__filename);
 
 const NAVIGATION_TIMEOUT = 60000; // Set navigation timeout to 60 seconds
 const RETRY_LIMIT = 3; // Set retry limit for page navigation
-
+//pdf link downloader
+const downloadPDF = async (url, destination) => {
+  return new Promise((resolve, reject) => {
+    https
+      .get(url, (response) => {
+        if (response.statusCode === 200) {
+          const chunks = [];
+          response.on("data", (chunk) => chunks.push(chunk));
+          response.on("end", async () => {
+            try {
+              const buffer = Buffer.concat(chunks);
+              await fs.writeFile(destination, buffer);
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
+          });
+        } else {
+          reject(new Error(`Failed to download PDF: ${response.statusCode}`));
+        }
+      })
+      .on("error", (err) => reject(err));
+  });
+};
 // Function to get URLs from the sitemap
 async function getSitemapUrls(sitemapUrl) {
   try {
@@ -344,7 +367,6 @@ async function getLinksFromFile(filePath) {
     return links;
   } catch (error) {
     console.error("Error reading or parsing file:", error);
-    
   }
 }
 // Main function to process the sitemap and images
@@ -354,16 +376,16 @@ async function main() {
 
   await fs.mkdir(imagesDir, { recursive: true });
 
-  const urls = await getSitemapUrls(sitemapUrl);
-  //   const urls = await getLinksFromFile("./b.txt");
+  // const urls = await getSitemapUrls(sitemapUrl);
+  const urls = await getLinksFromFile("./a.txt");
   if (urls.length === 0) return;
   console.log(urls.length);
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   try {
-    const url =
-      "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html";
+    // const url =
+    //   "https://www.alliantech.com/deplacements/16766-capteur-distance-haute-precision-as2100.html";
     // const imageUrls = await extractImagesFromPage(page, url);
     // const model = await getProductModal(page, url);
     // await Promise.all(
@@ -371,10 +393,9 @@ async function main() {
     //     saveImage(imageUrl, imagesDir, imgIndex, model)
     //   )
     // );
-
-    for (const [index, url] of urls.entries()) {
-      console.log(`Processing ${index + 1} of ${urls.length}`);
-      await extractImagesFromPage(page, url);
+    // for (const [index, url] of urls.entries()) {
+    //   console.log(`Processing ${index + 1} of ${urls.length}`);
+    //   await extractImagesFromPage(page, url);
     //   const imageUrls = await extractImagesFromPage(page, url);
     //   const model = await getProductModal(page, url);
     //   await Promise.all(
@@ -382,7 +403,7 @@ async function main() {
     //       saveImage(imageUrl, imagesDir, imgIndex, model)
     //     )
     //   );
-    }
+    // }
   } catch (error) {
     console.error("Error during processing:", error);
   } finally {

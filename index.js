@@ -12,29 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const NAVIGATION_TIMEOUT = 60000; // Set navigation timeout to 60 seconds
 const RETRY_LIMIT = 3; // Set retry limit for page navigation
-const downloadPDF = async (url, destination) => {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (response) => {
-        if (response.statusCode === 200) {
-          const chunks = [];
-          response.on("data", (chunk) => chunks.push(chunk));
-          response.on("end", async () => {
-            try {
-              const buffer = Buffer.concat(chunks);
-              await fs.writeFile(destination, buffer);
-              resolve();
-            } catch (error) {
-              reject(error);
-            }
-          });
-        } else {
-          reject(new Error(`Failed to download PDF: ${response.statusCode}`));
-        }
-      })
-      .on("error", (err) => reject(err));
-  });
-};
+
 // Function to get URLs from the sitemap
 async function getSitemapUrls(sitemapUrl) {
   try {
