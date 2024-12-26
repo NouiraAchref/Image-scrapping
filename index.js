@@ -5,7 +5,6 @@ import fs from "fs/promises";
 import path from "path";
 import { removeBackground } from "@imgly/background-removal-node";
 import { fileURLToPath } from "url";
-import https from "https";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -199,7 +198,7 @@ async function extractImagesFromPage(page, url, retryLimit = RETRY_LIMIT) {
         try {
           const breadcrumbText = document.querySelectorAll(
             ".breadcrumb.hidden-sm-down>ol>li>a>span"
-          )[2]?.textContent;
+          )[1]?.textContent;
           if (breadcrumbText !== "Capteurs") {
             return {
               images: [],
@@ -250,7 +249,9 @@ async function extractImagesFromPage(page, url, retryLimit = RETRY_LIMIT) {
             : "";
 
           const images = Array.from(
-            document.querySelectorAll(".col-md-6 .thumb-container img")
+            document.querySelectorAll(
+              ".col-md-6 .thumb-container img, .product-cover img"
+            )
           ).map((img) => img.src);
 
           return {
@@ -321,12 +322,12 @@ async function getProductModal(page) {
 }
 
 // Example usage
-const url = "https://example.com/product-page";
-const browser = await puppeteer.launch({ headless: true });
-const page = await browser.newPage();
+// const url = "https://example.com/product-page";
+// const browser = await puppeteer.launch({ headless: true });
+// const page = await browser.newPage();
 
-const model = await getProductModal(page, url);
-console.log("Product Modal (processed):", model);
+// const model = await getProductModal(page, url);
+// console.log("Product Modal (processed):", model);
 
 async function getLinksFromFile(filePath) {
   try {
@@ -353,7 +354,7 @@ async function main() {
   await fs.mkdir(imagesDir, { recursive: true });
 
   // const urls = await getSitemapUrls(sitemapUrl);
-  const urls = await getLinksFromFile("./b.txt");
+  const urls = await getLinksFromFile("./a.txt");
   if (urls.length === 0) return;
   console.log(urls.length);
   const browser = await puppeteer.launch({ headless: true });
@@ -369,17 +370,17 @@ async function main() {
     //     saveImage(imageUrl, imagesDir, imgIndex, model)
     //   )
     // );
-
-    for (const [index, url] of urls.entries()) {
-      console.log(`Processing ${index + 1} of ${urls.length}`);
-      const imageUrls = await extractImagesFromPage(page, url);
-      // const model = await getProductModal(page, url);
-      // await Promise.all(
-      //   imageUrls.map((imageUrl, imgIndex) =>
-      //     saveImage(imageUrl, imagesDir, imgIndex, model)
-      //   )
-      // );
-    }
+    // for (const [index, url] of urls.entries()) {
+    //   console.log(`Processing ${index + 1} of ${urls.length}`);
+    //   await extractImagesFromPage(page, url);
+    //   const imageUrls = await extractImagesFromPage(page, url);
+    //   const model = await getProductModal(page, url);
+    //   await Promise.all(
+    //     imageUrls.map((imageUrl, imgIndex) =>
+    //       saveImage(imageUrl, imagesDir, imgIndex, model)
+    //     )
+    //   );
+    // }
   } catch (error) {
     console.error("Error during processing:", error);
   } finally {
